@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
 export const LandingBox = styled.div`
-    width: 1440px;
     height: 100%;
     background-color: white;
 `
 export const Page = styled.div`
-    width: 1440px;
     display: flex;
 `
 
