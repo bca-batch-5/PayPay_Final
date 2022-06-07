@@ -1,0 +1,68 @@
+.form-box {
+  width: 61%;
+  margin-top: 50px;
+}
+
+.form{
+  border: transparent;
+  margin-left: 10px;
+  width: 90%;
+  outline: none;
+}
+
+.buttonEye{
+  border: none;
+  background-color: transparent;
+  outline: none;
+  color: #a9a9a999;
+}
+.forgot-pass{
+  text-decoration: none;
+  color: #a9a9a999;
+  opacity: 60%;
+  font-size: 14px;
+  margin-left: 240px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.forgot-pass:hover{
+  color: blue;
+}
+.WrongPassword{
+  display: none;
+  text-align: center;
+  color: red;
+}
+.btn-Login{
+  width: 350px;
+  height: 40px;
+  border: none;
+  background-color: #a9a9a999;
+  color: grey;
+  border-radius: 10px;
+  margin-top: 40px;
+}
+.form-subtext{
+  margin-top: 20px;
+  width: 350px;
+  text-align: center;
+  color: #a9a9a999;
+  font-weight: 600;
+  line-height: 23px;
+}
+.signup{
+  text-decoration: none;
+  color: blue;
+}
+.signup:hover{
+  color: rgb(4, 4, 176);
+}
+.form-valid{
+  display: none;
+}
+.logo-success-valid{
+  display: block;
+}
+.logo-sucess-no-valid{
+  display: none;
+}

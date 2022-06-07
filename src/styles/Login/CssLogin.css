@@ -1,0 +1,12 @@
+.image-phone2{
+    position: absolute;
+  left: 115px;
+}
+.image-phone1{
+  position: absolute;
+  z-index: 1;
+  left: 265px;
+}
+.border-auth{
+  display: flex;
+}

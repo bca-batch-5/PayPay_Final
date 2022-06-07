@@ -1,0 +1,134 @@
+.phone{
+    position: absolute;
+    right: 150px;
+    top: 110px;
+}
+
+/* style page one bagian kiri */
+.appName{
+    margin-top: 25px;
+    font-weight: bold;
+    color: #6379F4;
+    font-size: 25px;
+}
+
+.inPageLeft{
+    margin-left: 150px;
+}
+
+.title-box{
+    width: 75%;
+    margin-top: 100px;
+}
+
+.title{
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+.span-time{
+    color: #6379F4;
+}
+
+.subtitle{
+    margin-top: 30px;
+    font-size: 15px;
+}
+
+.button-one{
+    margin-top: 30px;
+}
+
+/* style page 1 bgian kanan*/
+
+.login-button{
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    top: 22px;
+    right: 100px;
+}
+
+
+/* bagian page kedua */
+
+.title-box-two{
+    text-align: center;
+    margin-top: 150px;
+}
+
+.title-two{
+    font-size: 60px;
+    font-weight: bolder;
+}
+
+.subtitle-two{
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 20px;
+    font-size: 17px;
+}
+
+.cards-box{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 55px;
+}
+
+/* bagian page 3 */
+.logo-group{
+    margin-top: 80px;
+}
+
+/* bagian page 4 */
+
+.page-four-box{
+    width: 50%;
+    padding-top: 30px;
+}
+
+.phone2-box{
+    width: 50%;
+    padding-left: 9%;
+    padding-top: 50px;
+}
+
+/* bagian footer */
+
+.footer{
+    background-color: #6379F4;
+    width: 100%;
+    height: 438px;
+}
+
+.footer-text-box{
+    padding-left: 100px;
+    padding-top: 75px;
+}
+
+.footer-title{
+    color: white;
+}
+
+.footer-subtitle{
+    color: #EFEFEFBF;
+    width: 18%;
+    margin-top: 30px;
+}
+
+
+.footer-bawah-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-top: 3px solid rgb(255, 255, 255, 0.6);
+    margin: 50px 100px 0px 100px ;
+}
+
+.footer-bawah-kanan{
+    display: flex;
+    justify-content: space-between;
+    width: 375px;
+}
