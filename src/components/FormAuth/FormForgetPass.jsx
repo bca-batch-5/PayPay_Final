@@ -27,7 +27,7 @@ const FormForgetPass = (props) => {
   const [passValue2, setPassValue2] = useState();
 
   useEffect(() => {
-    if (pageValid == "forget-pass") {
+    if (pageValid === "forget-pass") {
       setFormDisplay("form-display");
     } else {
       setFormDisplay("form-no-display");
@@ -47,7 +47,7 @@ const FormForgetPass = (props) => {
   }
 
   function inputHandlerPass(e) {
-    if (e.target.value == "") {
+    if (e.target.value === "") {
       setIconClassPass("icon-gray");
       setInputValidPass("input-empty");
       setBtnEyes("icon-gray");
@@ -60,7 +60,7 @@ const FormForgetPass = (props) => {
     btnChange(e);
   }
   function inputHandlerPass2(e) {
-    if (e.target.value == "") {
+    if (e.target.value === "") {
       setIconClassPass2("icon-gray");
       setInputValidPass2("input-empty");
       setBtnEyes2("icon-gray");
@@ -98,7 +98,7 @@ const FormForgetPass = (props) => {
     setPassSubmit("form-display");
   }
   function buttonEyes(e) {
-    if (passType == "password") {
+    if (passType === "password") {
       setPassType("text");
     } else {
       setPassType("password");
@@ -110,7 +110,7 @@ const FormForgetPass = (props) => {
     }
   }
   function buttonEyes2(e) {
-    if (passType2 == "password") {
+    if (passType2 === "password") {
       setPassType2("text");
     } else {
       setPassType2("password");
@@ -193,7 +193,7 @@ const FormForgetPass = (props) => {
         </BorderInput>
         <br />
         <br />
-        <Link to="/" onClick={passwordResetSubmit}>
+        <Link to="/signin" onClick={passwordResetSubmit}>
           <button
             id="btnLogin"
             className={`btn-Login ${buttonLogin}`}

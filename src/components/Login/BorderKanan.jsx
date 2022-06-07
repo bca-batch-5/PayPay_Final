@@ -24,15 +24,15 @@ const BorderKanan = (props) => {
 
   useEffect(() => {
     // page berada di signUp
-    if (linkPage == "/") {
+    if (linkPage === "/signin") {
       setFormValidation(false);
-    } else if (linkPage == "/signup") {
+    } else if (linkPage === "/signup") {
       // page berada di login
       setFormValidation(true);
     }
     setCurrentPage(page);
     // menghilangkan pilihan untuk login atau signup
-    if (currentPage == "create-pin" || currentPage == "forget-pass") {
+    if (currentPage === "create-pin" || currentPage === "forget-pass") {
       setLinkDisplay("form-valid");
     }
   });

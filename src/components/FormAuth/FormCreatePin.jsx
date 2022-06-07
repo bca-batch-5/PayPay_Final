@@ -21,7 +21,7 @@ const FormCreatePin = (props) => {
   const six = document.getElementById(`six`);
 
   useEffect(() => {
-    if (pageValid == "create-pin") {
+    if (pageValid === "create-pin") {
       setFormDisplay("form-display");
     }
   });
@@ -43,7 +43,7 @@ const FormCreatePin = (props) => {
   }
 
   function btnChange(e) {
-    if (e == "") {
+    if (e === "") {
       setBtnConfirm("btn-login-no-valid");
     } else {
       setBtnConfirm("btn-login-valid");
@@ -52,7 +52,7 @@ const FormCreatePin = (props) => {
 
   function moveEvent(e) {
     console.log(e.target.value.length);
-    if (e.target.value.length == 1) {
+    if (e.target.value.length === 1) {
       const form = e.target.form;
       const index = [...form].indexOf(e.target);
       form.elements[index + 1].focus();
@@ -123,7 +123,7 @@ const FormCreatePin = (props) => {
           <button className={`btn-confirm ${btnConfirm}`}>Confirm</button>
         </form>
       </div>
-      <Link to="/">
+      <Link to="/signin">
         <button className={`btn-login ${btnLogin}`}>Login</button>
       </Link>
     </div>

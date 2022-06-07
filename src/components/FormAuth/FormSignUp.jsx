@@ -22,10 +22,10 @@ export const FormSignUp = (props) => {
   const [linkClick, setLinkClick] = useState("#");
 
   useEffect(() => {
-    if (formValid == true) {
+    if (formValid === true) {
       setFromDisplay("form-valid");
     }
-    if(pageValid == "create-pin" || pageValid == "forget-pass"){
+    if(pageValid === "create-pin" || pageValid === "forget-pass"){
       setFromDisplay("form-valid");
     }
   });
@@ -54,7 +54,7 @@ export const FormSignUp = (props) => {
   }
 
   function inputHandlerPass(e) {
-    if (e.target.value == "") {
+    if (e.target.value === "") {
       setIconClassPass("icon-gray");
       setInputValidPass("input-empty");
       setBtnEyes("icon-gray");
@@ -67,7 +67,7 @@ export const FormSignUp = (props) => {
   }
 
   function buttonEyes(e) {
-    if (passType == "password") {
+    if (passType === "password") {
       setPassType("text");
     } else {
       setPassType("password");
