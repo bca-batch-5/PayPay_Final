@@ -89,7 +89,7 @@ const LandingPage = () => {
             </ButtonComp>
             </Link>
           </div>
-          <img src={background} alt="background-atas" />
+          <img src={background} alt="background-atas" style={{width:'100%'}} />
           <img className="phone" src={phone} alt="" />
         </PageOneRight>
       </Page>

@@ -4,6 +4,7 @@ import SignUp from "./pages/SignUp";
 import CreatePin from "./pages/CreatePin";
 import { ForgetPass } from "./pages/ForgetPass";
 import LandingPage from "./pages/LandingPage";
+import History from "./pages/History";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/signup" element={<SignUp/>}/>
           <Route path="/create-pin" element={<CreatePin/>}/>
           <Route path="/forget-password" element={<ForgetPass/>}/>
+          <Route path="/home/history" element={<History/>}/>
         </Routes>
     </BrowserRouter>
   );
