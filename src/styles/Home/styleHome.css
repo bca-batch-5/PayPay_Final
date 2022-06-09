@@ -1,0 +1,57 @@
+.box-kanan-all{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.box-kanan-biru{
+    width: 100%;
+    border-radius: 25px;
+    background-color: #6379F4;
+}
+
+.in-box-kanan-biru{
+    padding: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.box-biru-button{
+    display: flex;
+    flex-direction: column;
+}
+
+/* box bawah */
+
+.box-kanan-bawah-all{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.box-bawah-kiri{
+    width:55%;
+    border-radius:25px;
+    background-color:white;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+.in-box-bawah-kiri{
+    padding: 45px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+}
+
+.box-bawah-kanan{
+    width:45%;
+    border-radius:25px;
+    background-color:white;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.in-box-bawah-kanan{
+    padding: 20px;
+}
