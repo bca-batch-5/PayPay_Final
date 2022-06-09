@@ -11,7 +11,7 @@ import arrowGreen from '../Assets/arrow-up-hijau.png'
 import arrowRed from '../Assets/arrow-up-merah.png'
 const Home = () => {
   return (
-    <HomeLayouts>
+    <HomeLayouts halaman='home'>
       <div className="box-kanan-all">
         <div className="box-kanan-biru">
           <div className="in-box-kanan-biru">

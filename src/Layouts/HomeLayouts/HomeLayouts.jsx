@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Navbox, InNavbox } from "../../styles/HomeLayouts/Navbar/StyleNavbar";
 import people3 from "../../Assets/Foto3.jpg";
 import "../../styles/HomeLayouts/Navbar/styleNavbar.css";
@@ -22,7 +22,7 @@ import { InNotifBox, NotifBox } from "../../styles/HomeLayouts/Box/NotifStyle";
 import TransactionBox2 from "../../components/TransactionBox/TransactionBox2";
 
 const HomeLayouts = (props) => {
-  const { children } = props;
+  const { children, halaman } = props;
   const [dashboard, setDashboard] = useState(dashboardImg);
   const [transfer, setTransfer] = useState(transferImg);
   const [topup, setTopup] = useState(topupImg);
@@ -48,8 +48,10 @@ const HomeLayouts = (props) => {
     setLeftTextDashboard("left-text-color");
   }
   function dashboardLeave() {
-    setDashboard(dashboardImg);
-    setLeftTextDashboard("left-text");
+    if (halaman != 'home') {
+      setDashboard(dashboardImg);
+      setLeftTextDashboard("left-text");
+    }
   }
 
   function transferEnter() {
@@ -57,8 +59,10 @@ const HomeLayouts = (props) => {
     setLeftTextTransfer("left-text-color");
   }
   function transferLeave() {
-    setTransfer(transferImg);
-    setLeftTextTransfer("left-text");
+    if (halaman != 'transfer') {
+      setTransfer(transferImg);
+      setLeftTextTransfer("left-text");
+    }
   }
 
   function topupEnter() {
@@ -87,8 +91,25 @@ const HomeLayouts = (props) => {
     setLeftTextLogout("left-text");
   }
 
+  function checkHalaman(){
+    if (halaman === 'home') {
+        setDashboard(dashboardImgBlue)
+        setLeftTextDashboard("left-text-color")
+
+    }else if (halaman === 'transfer') {
+        setTransfer(transferImgBlue)
+        setLeftTextTransfer("left-text-color")
+    }
+  }
+
+  useEffect(() => {
+    checkHalaman()
+    }
+  , [])
+  
+
   return (
-    <div className="layouts-box">
+    <div className="layouts-box" id={halaman}>
       <Navbox>
         <InNavbox>
           <h3 className="title">PayPay</h3>
@@ -151,7 +172,7 @@ const HomeLayouts = (props) => {
             <div className="left-box-text">
               <img src={dashboard} alt="dashboard" />
               <Link
-                to={"#"}
+                to={"/home"}
                 className={leftTextDashboard}
                 onMouseEnter={dashboardEnter}
                 onMouseLeave={dashboardLeave}
@@ -164,7 +185,7 @@ const HomeLayouts = (props) => {
             <div className="left-box-text">
               <img src={transfer} alt="transfer" />
               <Link
-                to={"#"}
+                to={"/transfer"}
                 className={leftTextTransfer}
                 onMouseEnter={transferEnter}
                 onMouseLeave={transferLeave}

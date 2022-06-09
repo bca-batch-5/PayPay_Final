@@ -9,7 +9,7 @@ const History = () => {
 
 
   return (
-    <HomeLayouts>
+    <HomeLayouts halaman='home'>
       <RightBox>
         <p style={{fontWeight:'bold'}}>Transaction History</p>
         <div className='week-box'>
