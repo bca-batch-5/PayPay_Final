@@ -1,0 +1,48 @@
+.title{
+    color: #6379F4;
+    font-size: 28px;
+}
+
+.identity-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 280px;
+}
+
+.fa-bell{
+    font-size: 28px;
+    color: #6379F4;
+}
+
+.fa-bell:hover{
+    color: rgba(80, 64, 255, 0.58);
+}
+
+.bell-button{
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.image-user{
+    width: 50px;
+    height: 50px;
+}
+
+.name{
+    font-size: 20px;
+    font-weight: bolder;
+    line-height: 30px;
+}
+
+.phone-number{
+    font-size: 14px;
+    font-weight: 400;
+    color: grey;
+}
+
+.text-box{
+    width: 120px;
+}

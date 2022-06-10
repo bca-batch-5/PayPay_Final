@@ -5,7 +5,7 @@ color:${(props) => props.color};
 background-color:${(props) => props.backgroundColor};
 padding: 10px;
 width: ${props => props.width};
-border-color: ${props => props.borderColor};
+border: ${props => props.border};
 border-radius: 10px;
 transition: 0.2s;
 cursor: pointer;
@@ -13,7 +13,7 @@ cursor: pointer;
 &:hover{
     background-color:${props => props.bgHover};
     color:${props => props.colorHover};
-    border-color: ${props => props.borderColorHover}
+    border: ${props => props.borderColorHover}
 
 }
 `

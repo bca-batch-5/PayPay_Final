@@ -2,11 +2,11 @@ import React from 'react'
 import { Button } from '../../styles/Button/buttonStyle'
 
 const ButtonComp = (props) => {
-    const {children,color,backgroundColor, width, bgHover,colorHover,borderColor,borderColorHover}=props;
+    const {children,color,backgroundColor, width, bgHover,colorHover,border,borderHover,onClick}=props;
 
   return (
-    <Button color={color} backgroundColor={backgroundColor}
-    width={width} bgHover={bgHover} colorHover={colorHover} borderColor={borderColor} borderColorHover={borderColorHover}
+    <Button onClick={onClick} color={color} backgroundColor={backgroundColor}
+    width={width} bgHover={bgHover} colorHover={colorHover} border={border} borderHover={borderHover}
     >{children}</Button>
   )
 }

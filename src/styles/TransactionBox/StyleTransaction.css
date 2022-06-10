@@ -1,0 +1,37 @@
+/* box transaksi */
+
+.transaction-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.transaction-box-left{
+    display: flex;
+    align-items: center;
+}
+
+.transaction-box-detail{
+    margin-left: 20px;
+}
+
+/* box transaksi 2 */
+.transaction-box2{
+    margin: 10px;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.inside-transaction-box2{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.transaction-box-detail2{
+    margin-left: 20px;
+}

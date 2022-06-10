@@ -50,8 +50,8 @@ const LandingPage = () => {
                   width="150px"
                   bgHover="white"
                   colorHover="#6379F4"
-                  borderColor="white"
-                  borderColorHover="#6379F4"
+                  border="2px solid white"
+                  borderHover="2px solid #6379F4"
                 >
                   Try it Free
                 </ButtonComp>
@@ -69,8 +69,8 @@ const LandingPage = () => {
               width="110px"
               bgHover="white"
               colorHover="#6379F4"
-              borderColor="white"
-              borderColorHover="#6379F4"
+              border="2px solid white"
+              borderHover="2px solid #6379F4"
             >
               Login
             </ButtonComp>
@@ -82,14 +82,14 @@ const LandingPage = () => {
               width="110px"
               bgHover="#6379F4"
               colorHover="white"
-              borderColor="#6379F4"
-              borderColorHover="white"
+              border="2px solid #6379F4"
+              borderHover=" 2px solid white"
             >
               Sign Up
             </ButtonComp>
             </Link>
           </div>
-          <img src={background} alt="background-atas" />
+          <img src={background} alt="background-atas" style={{width:'100%'}} />
           <img className="phone" src={phone} alt="" />
         </PageOneRight>
       </Page>

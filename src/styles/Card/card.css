@@ -64,3 +64,55 @@
 .subtitle-card2{
     font-size: 16px;
 }
+
+
+/* card 4 dan 5 */
+
+.card-box4{
+    width: 100%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.card-inside4{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.title-card4{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.subtitle-card4{
+    font-size: 20px;
+    color: #7A7886;
+}
+
+
+/* card 6 */
+
+.card-box6{
+    width: 100%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.card-inside6{
+    padding: 20px;
+}
+
+.title-card6{
+    font-size: 20px;
+    color: #7A7886;
+}
+
+.subtitle-card6{
+    font-size: 25px;
+    font-weight: bold;
+}
