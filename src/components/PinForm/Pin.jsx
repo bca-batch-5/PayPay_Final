@@ -18,9 +18,9 @@ const Pin = () => {
 
   return (
     <form style={{width:'100%'}}>
-    <div className="pin-form">
+    <div className="pin-form-baru">
       <input
-        className="form-pin"
+        className="form-pin-baru"
         type="text"
         maxlength="1"
         id="first"
@@ -28,7 +28,7 @@ const Pin = () => {
         onKeyUp={moveEvent}
       />
       <input
-        className="form-pin"
+        className="form-pin-baru"
         type="text"
         maxlength="1"
         id="sec"
@@ -36,7 +36,7 @@ const Pin = () => {
         onKeyUp={moveEvent}
       />
       <input
-        className="form-pin"
+        className="form-pin-baru"
         type="text"
         maxlength="1"
         id="third"
@@ -44,7 +44,7 @@ const Pin = () => {
         onKeyUp={moveEvent}
       />
       <input
-        className="form-pin"
+        className="form-pin-baru"
         type="text"
         maxlength="1"
         id="fourth"
@@ -52,7 +52,7 @@ const Pin = () => {
         onKeyUp={moveEvent}
       />
       <input
-        className="form-pin"
+        className="form-pin-baru"
         type="text"
         maxlength="1"
         id="fifth"
@@ -60,7 +60,7 @@ const Pin = () => {
         onKeyUp={moveEvent}
       />
       <input
-        className="form-pin"
+        className="form-pin-baru"
         type="text"
         maxlength="1"
         id="six"
