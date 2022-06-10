@@ -11,6 +11,8 @@ import TransferInput from "./pages/TransferInput";
 import TransferConfirmation from "./pages/TransferConfirmation";
 import TransferSucces from "./pages/TransferSucces";
 import TransferFailed from "./pages/TransferFailed";
+import ChangePassword from "./pages/ChangePassword";
+import ChangePin from "./pages/ChangePin";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           <Route path="/create-pin" element={<CreatePin/>}/>
           <Route path="/forget-password" element={<ForgetPass/>}/>
           <Route path="/home/history" element={<History/>}/>
+          <Route path="/profile/changepassword" element={<ChangePassword/>}/>
+          <Route path="/profile/changepin" element={<ChangePin/>}/>
         </Routes>
     </BrowserRouter>
   );
