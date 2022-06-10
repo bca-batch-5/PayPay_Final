@@ -9,13 +9,14 @@ import MaskGroup from "../../Assets/MaskGroup.svg";
 import phoneOne from "../../Assets/png-phone.png";
 import phoneTwo from "../../Assets/png-phone2.png";
 import "../../styles/Login/CssLogin.css";
+import { Link } from "react-router-dom";
 
 const BorderKiri = () => {
   return (
     <BorderLogo image={MaskGroup}>
-      <BorderTitle>
-        <p>PayPay</p>
-      </BorderTitle>
+      <Link to="/" className="border-title">
+        PayPay
+      </Link>
       <LeftImage>
         <img src={phoneTwo} alt="gambar phone 2" className="image-phone2" />
         <img src={phoneOne} alt="gambar phone 1" className="image-phone1" />

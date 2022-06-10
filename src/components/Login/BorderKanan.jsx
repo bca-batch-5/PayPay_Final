@@ -5,7 +5,7 @@ import {
   BoxKananDalam,
 } from "../../styles/Login/StyleLogin";
 import { FormLogin } from "../FormAuth/FormLogin";
-import { FormSignUp } from "../FormAuth/FormSignUp";
+import FormSignUp from "../FormAuth/FormSignUp";
 import FormCreatePin from "../FormAuth/FormCreatePin";
 import "../../styles/Form/FormLogin.css";
 import { Link } from "react-router-dom";
@@ -35,7 +35,7 @@ const BorderKanan = (props) => {
     if (currentPage === "create-pin" || currentPage === "forget-pass") {
       setLinkDisplay("form-valid");
     }
-  });
+  },[]);
 
   function successHandler(display, title, subTitle){
     setSuccessDisplay(display);
