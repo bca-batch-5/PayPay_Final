@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../styles/Form/ManipulationForm.css";
 import "../../styles/Form/CreatePin.css";
 import { Link } from "react-router-dom";
+import { CreatePinService } from "../../services/SignUpService";
 
 const FormCreatePin = (props) => {
   const { pageValid, logoSuccess } = props;
@@ -12,13 +13,10 @@ const FormCreatePin = (props) => {
   const [subJudul, setSubJudul] = useState(
     "Your PIN was successfully created and you can now access all the features in PayPay. Login to your new account and start exploring!"
   );
+  const [alertMessagePin, setAlertMessagePin] = useState();
+  const [pin, setPin] = useState([]);
   const [btnLogin, setBtnLogin] = useState();
   const [btnConfirm, setBtnConfirm] = useState();
-  const formBox = document.getElementById(`formBox`);
-  const loginBtn = document.getElementById(`loginBtn`);
-  const confirmBtn = document.getElementById(`btnConfirm`);
-  const titleImage = document.getElementById(`titleImage`);
-  const six = document.getElementById(`six`);
 
   useEffect(() => {
     if (pageValid === "create-pin") {
@@ -28,18 +26,45 @@ const FormCreatePin = (props) => {
 
   function confirmButton(e) {
     e.preventDefault();
-    // formBox.style.display = `none`;
-    // loginBtn.style.display = `block`;
-    setLogoSuccessValid("logo-success-valid");
-    logoSuccess(logoSuccessValid, judul, subJudul);
-    setFormHide("form-no-display");
-    setBtnLogin("form-display");
+    console.log(pin);
+    validationPin();
+    createPin();
   }
+
+  function validationPin() {
+    console.log(pin.length);
+    if (pin.length < 6) {
+      setAlertMessagePin("form-display");
+    }
+  }
+
+  // create pin
+  const createPin = async () => {
+    const data = {
+      pin,
+    };
+    const res = await CreatePinService(data);
+    console.log(`res status: ${res.data.status}`);
+    if (res.data.status === 201) {
+      setLogoSuccessValid("logo-success-valid");
+      logoSuccess(logoSuccessValid, judul, subJudul);
+      setFormHide("form-no-display");
+      setBtnLogin("form-display");
+    }
+    console.log("Data dari Create Pin: " + res);
+  };
 
   // disable button\
 
   function sixInputHandler(e) {
     btnChange(e.target.value);
+    getValue(e);
+  }
+
+  function getValue(e) {
+    if (e.target.value != "") {
+      setPin([...pin, e.target.value]);
+    }
   }
 
   function btnChange(e) {
@@ -66,6 +91,10 @@ const FormCreatePin = (props) => {
     }
   }
 
+  function lastInput(e) {
+    return /[0-9]/i.test(e.key);
+  }
+
   return (
     <div className={formDisplay}>
       <div id="formBox" className={formHide}>
@@ -74,52 +103,60 @@ const FormCreatePin = (props) => {
             <input
               className="form-pin"
               type="text"
-              maxlength="1"
+              maxLength="1"
               id="first"
               onKeyPress={pressHandler}
               onKeyUp={moveEvent}
+              onInput={getValue}
             />
             <input
               className="form-pin"
               type="text"
-              maxlength="1"
+              maxLength="1"
               id="sec"
               onKeyPress={pressHandler}
               onKeyUp={moveEvent}
+              onInput={getValue}
             />
             <input
               className="form-pin"
               type="text"
-              maxlength="1"
+              maxLength="1"
               id="third"
               onKeyPress={pressHandler}
               onKeyUp={moveEvent}
+              onInput={getValue}
             />
             <input
               className="form-pin"
               type="text"
-              maxlength="1"
+              maxLength="1"
               id="fourth"
               onKeyPress={pressHandler}
               onKeyUp={moveEvent}
+              onInput={getValue}
             />
             <input
               className="form-pin"
               type="text"
-              maxlength="1"
+              maxLength="1"
               id="fifth"
               onKeyPress={pressHandler}
               onKeyUp={moveEvent}
+              onInput={getValue}
             />
             <input
               className="form-pin"
               type="text"
-              maxlength="1"
+              maxLength="1"
               id="six"
               onInput={sixInputHandler}
-              onkeypress=" return/[0-9]/i.test(event.key)"
+              onKeyPress={lastInput}
             />
           </div>
+          <p id="alert" className={`alert-message ${alertMessagePin}`}>
+            Pin harus di isi semua!
+          </p>
           <button className={`btn-confirm ${btnConfirm}`}>Confirm</button>
         </form>
       </div>

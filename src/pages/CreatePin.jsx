@@ -7,8 +7,8 @@ const CreatePin = () => {
     <div className="border-auth">
       <BorderKiri></BorderKiri>
       <BorderKanan
-        linking=""
-        linkPage=""
+        linking=" SignUp"
+        linkPage="/signup"
         page="create-pin"
         judul="Secure Your Account, Your Wallet,
         and Your Data With 6 Digits PIN

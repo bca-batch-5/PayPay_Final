@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BorderInput } from "./FormLoginStyle";
 import "../../styles/Form/ManipulationForm.css";
+import {
+  ForgetPassService,
+  newPassService,
+} from "../../services/ForgetPassService";
 
 const FormForgetPass = (props) => {
   const { pageValid } = props;
@@ -20,11 +24,14 @@ const FormForgetPass = (props) => {
   const [iconEyes2, setIconEyes2] = useState("fa-eye-slash");
   const [emailValue, setEmailValue] = useState();
   const [alertMessage, setAlertMessage] = useState();
+  const [alertMessagePassword, setAlertMessagePassword] = useState();
+  const [alertMessageEmailNotFound, setAlertMessageEmailNotFound] = useState();
   const [buttonLogin, setButtonLogin] = useState();
   const [emailSumbit, setEmailSubmit] = useState();
   const [passSubmit, setPassSubmit] = useState("form-no-display");
   const [passValue, setPassValue] = useState();
   const [passValue2, setPassValue2] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (pageValid === "forget-pass") {
@@ -33,6 +40,57 @@ const FormForgetPass = (props) => {
       setFormDisplay("form-no-display");
     }
   });
+
+  const inputEmailResetPass = async () => {
+    const data = {
+      email:emailValue
+    };
+    const res = await ForgetPassService(data);
+    console.log("input email:" + emailValue);
+    if (res.data.status === 200) {
+      setEmailSubmit("form-no-display");
+      setPassSubmit("form-display");
+    } else {
+      setIconClassEmail("icon-red");
+      setInputValidEmail("input-failed");
+      setAlertMessageEmailNotFound("wrong-pass-display");
+    }
+    console.log("res status: " + res.data.status);
+  };
+
+  function forgetPassEmailForm(e) {
+    e.preventDefault();
+    inputEmailResetPass(e);
+  }
+
+  const newResetPass = async () => {
+    const data = {
+      newPassword:passValue,
+      sameNewPassword:passValue2
+    };
+    const res = await newPassService(data);
+    console.log("passValue" + passValue);
+    console.log("passValue2: " + passValue2);
+    if (res.data.status === 200) {
+      alert("Password Terganti");
+      navigate("/signin");
+    }
+    console.log("res status: " + res.data.status);
+  };
+
+  function passwordResetSubmit(e) {
+    e.preventDefault();
+    passValidation();
+    newResetPass();
+  }
+
+  const passValidation = () => {
+    if (passValue != null && passValue2 !== null) {
+      if (passValue != passValue2) {
+        setAlertMessagePassword("wrong-pass-display");
+      }
+    }
+  };
 
   function inputHandlerEmail(e) {
     if (e.target.value === "") {
@@ -87,16 +145,12 @@ const FormForgetPass = (props) => {
     if (e.target.value === "") {
       setButtonLogin("btn-login-no-valid");
       setAlertMessage("wrong-pass-no-display");
+      setAlertMessageEmailNotFound("wrong-pass-no-display");
     } else {
       setButtonLogin("btn-login-valid");
     }
   }
 
-  function forgetPassEmailForm(e) {
-    e.preventDefault();
-    setEmailSubmit("form-no-display");
-    setPassSubmit("form-display");
-  }
   function buttonEyes(e) {
     if (passType === "password") {
       setPassType("text");
@@ -122,9 +176,6 @@ const FormForgetPass = (props) => {
     }
   }
 
-  function passwordResetSubmit(){
-      alert("Password Terganti");
-  }
   return (
     <div className={formDisplay}>
       {/* form email */}
@@ -144,6 +195,9 @@ const FormForgetPass = (props) => {
         <br />
         <p id="alert" className={`WrongPassword ${alertMessage}`}>
           Email Invalid
+        </p>
+        <p id="alert" className={`WrongPassword ${alertMessageEmailNotFound}`}>
+          Email Tidak Terdaftar
         </p>
         <button
           id="btnLogin"
@@ -193,11 +247,11 @@ const FormForgetPass = (props) => {
         </BorderInput>
         <br />
         <br />
+        <p id="alert" className={`WrongPassword ${alertMessagePassword}`}>
+          Password Tidak Sesuai
+        </p>
         <Link to="/signin" onClick={passwordResetSubmit}>
-          <button
-            id="btnLogin"
-            className={`btn-Login ${buttonLogin}`}
-          >
+          <button id="btnLogin" className={`btn-Login ${buttonLogin}`}>
             Reset Password
           </button>
         </Link>

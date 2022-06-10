@@ -7,8 +7,8 @@ export const ForgetPass = () => {
     <div className="border-auth">
       <BorderKiri></BorderKiri>
       <BorderKanan
-        linking=""
-        linkPage=""
+        linking=" SignUp"
+        linkPage="/signup"
         page="forget-pass"
         judul="Did You Forgot Your Password? Don't Worry, You Can Reset Your Password In a Minutes."
         subJudul="Transfering money is eassier than ever, you can access Pay Pay
