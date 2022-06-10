@@ -99,6 +99,9 @@ const HomeLayouts = (props) => {
     }else if (halaman === 'transfer') {
         setTransfer(transferImgBlue)
         setLeftTextTransfer("left-text-color")
+    }else if (halaman === 'profile'){
+      setProfile(profileImgBlue)
+      setLeftTextProfile('left-text-color')
     }
   }
 
