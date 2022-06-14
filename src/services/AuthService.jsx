@@ -12,7 +12,6 @@ export const AuthService = async (data) => {
   if (response.data.status < 400) {
     const token = response.data.data.accessToken;
     if (response.data.status === 201 && token) {
-      alert("Login Berhasil");
       console.log(`Response API Login`, response);
       const user = response.data.data;
       localStorage.setItem("user", JSON.stringify(user));

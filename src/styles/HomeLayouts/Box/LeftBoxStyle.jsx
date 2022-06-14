@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const LeftBox = styled.div`
 background-color: white;
+
 width: 27%;
 box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 border-radius: 25px;

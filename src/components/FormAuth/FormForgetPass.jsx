@@ -6,6 +6,8 @@ import {
   ForgetPassService,
   newPassService,
 } from "../../services/ForgetPassService";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FormForgetPass = (props) => {
   const { pageValid } = props;
@@ -46,7 +48,6 @@ const FormForgetPass = (props) => {
       email:emailValue
     };
     const res = await ForgetPassService(data);
-    console.log("input email:" + emailValue);
     if (res.data.status === 200) {
       setEmailSubmit("form-no-display");
       setPassSubmit("form-display");
@@ -55,7 +56,6 @@ const FormForgetPass = (props) => {
       setInputValidEmail("input-failed");
       setAlertMessageEmailNotFound("wrong-pass-display");
     }
-    console.log("res status: " + res.data.status);
   };
 
   function forgetPassEmailForm(e) {
@@ -69,13 +69,18 @@ const FormForgetPass = (props) => {
       sameNewPassword:passValue2
     };
     const res = await newPassService(data);
-    console.log("passValue" + passValue);
-    console.log("passValue2: " + passValue2);
     if (res.data.status === 200) {
-      alert("Password Terganti");
-      navigate("/signin");
+      setTimeout(() =>  navigate("/signin"), 2000);
+      toast.success("Password berhasil di ganti", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
     }
-    console.log("res status: " + res.data.status);
   };
 
   function passwordResetSubmit(e) {
@@ -256,6 +261,17 @@ const FormForgetPass = (props) => {
           </button>
         </Link>
       </form>
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
     </div>
   );
 };

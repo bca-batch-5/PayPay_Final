@@ -91,6 +91,7 @@ const FormSignUp = (props) => {
     if (e.target.value === "") {
       setIconClassEmail("icon-gray");
       setInputValidEmail("input-empty");
+      setAlertMessageEmailExist("wrong-pass-no-display");
     } else {
       setIconClassEmail("icon-blue");
       setInputValidEmail("input-valid");

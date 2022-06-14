@@ -9,7 +9,6 @@ export const ForgetPassService = async (data) => {
         method:"put",
         data
     });
-    console.log(`Response API Forget pass: `, response);
     return response
 }
 
@@ -20,7 +19,6 @@ export const newPassService = async (data) => {
         method:"put",
         data
     });
-    console.log(`Response API Forget pass: `, response);
     return response
 }
 

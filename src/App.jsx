@@ -11,6 +11,11 @@ import TransferInput from "./pages/TransferInput";
 import TransferConfirmation from "./pages/TransferConfirmation";
 import TransferSucces from "./pages/TransferSucces";
 import TransferFailed from "./pages/TransferFailed";
+import { TopUp } from "./pages/TopUp";
+import { Profile } from "./pages/Profile";
+import { PersonalInformation } from "./pages/PersonalInformation";
+import { AddPhoneNumber} from "./pages/AddPhoneNumber";
+import { ManagePhoneNumber } from "./pages/ManagePhoneNumber";
 import ChangePassword from "./pages/ChangePassword";
 import ChangePin from "./pages/ChangePin";
 
@@ -30,8 +35,14 @@ function App() {
           <Route path="/create-pin" element={<CreatePin/>}/>
           <Route path="/forget-password" element={<ForgetPass/>}/>
           <Route path="/home/history" element={<History/>}/>
+          <Route path="/topup" element={<TopUp/>}/>
+          <Route path="/profil" element={<Profile/>}/>
+          <Route path="/personal-information" element={<PersonalInformation/>}/>
+          <Route path="/add-phone" element={<AddPhoneNumber/>}/>
+          <Route path="/manage-phone" element={<ManagePhoneNumber/>}/>
           <Route path="/profile/changepassword" element={<ChangePassword/>}/>
           <Route path="/profile/changepin" element={<ChangePin/>}/>
+
         </Routes>
     </BrowserRouter>
   );

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbox, InNavbox } from "../../styles/HomeLayouts/Navbar/StyleNavbar";
 import people3 from "../../Assets/Foto3.jpg";
 import "../../styles/HomeLayouts/Navbar/styleNavbar.css";
@@ -20,6 +20,9 @@ import logoutImg from "../../Assets/log-out.png";
 import { Link } from "react-router-dom";
 import { InNotifBox, NotifBox } from "../../styles/HomeLayouts/Box/NotifStyle";
 import TransactionBox2 from "../../components/TransactionBox/TransactionBox2";
+import defaultPhoto from "../../Assets/defaultPhoto.jpg";
+import { getPhoto } from "../../services/ProfilService";
+import { getUserbyEmail } from "../../services/UserService";
 
 const HomeLayouts = (props) => {
   const { children, halaman } = props;
@@ -34,6 +37,15 @@ const HomeLayouts = (props) => {
   const [leftTextProfile, setLeftTextProfile] = useState("left-text");
   const [leftTextLogout, setLeftTextLogout] = useState("left-text");
   const [display, setDisplay] = useState("none");
+  const [foto, setFoto] = useState("");
+  const [nama, setNama] = useState();
+  const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
+
+  useEffect(() => {
+    checkHalaman();
+    getPhotoProfil();
+    getUserData();
+  }, []);
 
   function notifButton() {
     if (display === "none") {
@@ -43,12 +55,26 @@ const HomeLayouts = (props) => {
     }
   }
 
+  const getUserData = async() =>{
+    const response = await getUserbyEmail();
+    setNama(response.data.data.nama);
+    if(response.data.data.noTelp != null){
+      setNoTelp(response.data.data.noTelp);
+    } 
+  }
+
+  const getPhotoProfil = async () => {
+    const url = await getPhoto();
+    console.log("link: ", url);
+    setFoto(url);
+  };
+
   function dashboardEnter() {
     setDashboard(dashboardImgBlue);
     setLeftTextDashboard("left-text-color");
   }
   function dashboardLeave() {
-    if (halaman != 'home') {
+    if (halaman != "home") {
       setDashboard(dashboardImg);
       setLeftTextDashboard("left-text");
     }
@@ -59,7 +85,7 @@ const HomeLayouts = (props) => {
     setLeftTextTransfer("left-text-color");
   }
   function transferLeave() {
-    if (halaman != 'transfer') {
+    if (halaman != "transfer") {
       setTransfer(transferImg);
       setLeftTextTransfer("left-text");
     }
@@ -91,6 +117,7 @@ const HomeLayouts = (props) => {
     setLeftTextLogout("left-text");
   }
 
+
   function checkHalaman(){
     if (halaman === 'home') {
         setDashboard(dashboardImgBlue)
@@ -105,22 +132,20 @@ const HomeLayouts = (props) => {
     }
   }
 
-  useEffect(() => {
-    checkHalaman()
-    }
-  , [])
   
 
   return (
     <div className="layouts-box" id={halaman}>
       <Navbox>
         <InNavbox>
-          <h3 className="title">PayPay</h3>
+          <Link to={"/home"} className="title">
+            PayPay
+          </Link>
           <div className="identity-box">
-            <img className="image-user" src={people3} alt="foto" />
+            <img className="image-user" src={foto?foto:defaultPhoto} alt="foto" />
             <div className="text-box">
-              <p className="name">Ragil</p>
-              <p className="phone-number">089 0020 2022</p>
+              <p className="name">{nama}</p>
+              <p className="phone-number">{noTelp}</p>
             </div>
             <button className="bell-button" onClick={notifButton}>
               <i className="fa fa-bell"></i>
@@ -131,8 +156,8 @@ const HomeLayouts = (props) => {
       <div className="main-layouts">
         <NotifBox display={display}>
           <InNotifBox>
-              <p style={{ color: "#7A7886", fontSize: "15px" }}>Today</p>
-            <div style={{ marginTop: "10px", overflowY:'scroll'}}>
+            <p style={{ color: "#7A7886", fontSize: "15px" }}>Today</p>
+            <div style={{ marginTop: "10px", overflowY: "scroll" }}>
               <TransactionBox2
                 tipe="kredit"
                 description="Transfered from Joshua Lee"
@@ -150,8 +175,8 @@ const HomeLayouts = (props) => {
               />
             </div>
             <br />
-              <p style={{ color: "#7A7886", fontSize: "15px" }}>This Week</p>
-            <div style={{ marginTop: "10px", overflowY:'scroll' }}>
+            <p style={{ color: "#7A7886", fontSize: "15px" }}>This Week</p>
+            <div style={{ marginTop: "10px", overflowY: "scroll" }}>
               <TransactionBox2
                 tipe="kredit"
                 description="Transfered from Joshua Lee"
@@ -201,7 +226,7 @@ const HomeLayouts = (props) => {
             <div className="left-box-text">
               <img src={topup} alt="top up" />
               <Link
-                to={"#"}
+                to={"/topup"}
                 className={leftTextTopup}
                 onMouseEnter={topupEnter}
                 onMouseLeave={topupLeave}
@@ -215,7 +240,7 @@ const HomeLayouts = (props) => {
               <div className="left-box-text">
                 <img src={profile} alt="" />
                 <Link
-                  to={"#"}
+                  to={"/profil"}
                   className={leftTextProfile}
                   onMouseEnter={profileEnter}
                   onMouseLeave={profileLeave}
