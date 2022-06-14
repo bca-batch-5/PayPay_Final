@@ -16,7 +16,8 @@ import { Profile } from "./pages/Profile";
 import { PersonalInformation } from "./pages/PersonalInformation";
 import { AddPhoneNumber} from "./pages/AddPhoneNumber";
 import { ManagePhoneNumber } from "./pages/ManagePhoneNumber";
-
+import ChangePassword from "./pages/ChangePassword";
+import ChangePin from "./pages/ChangePin";
 
 function App() {
   return (
@@ -39,6 +40,9 @@ function App() {
           <Route path="/personal-information" element={<PersonalInformation/>}/>
           <Route path="/add-phone" element={<AddPhoneNumber/>}/>
           <Route path="/manage-phone" element={<ManagePhoneNumber/>}/>
+          <Route path="/profile/changepassword" element={<ChangePassword/>}/>
+          <Route path="/profile/changepin" element={<ChangePin/>}/>
+
         </Routes>
     </BrowserRouter>
   );

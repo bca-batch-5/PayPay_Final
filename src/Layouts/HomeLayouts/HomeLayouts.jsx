@@ -117,13 +117,18 @@ const HomeLayouts = (props) => {
     setLeftTextLogout("left-text");
   }
 
-  function checkHalaman() {
-    if (halaman === "home") {
-      setDashboard(dashboardImgBlue);
-      setLeftTextDashboard("left-text-color");
-    } else if (halaman === "transfer") {
-      setTransfer(transferImgBlue);
-      setLeftTextTransfer("left-text-color");
+
+  function checkHalaman(){
+    if (halaman === 'home') {
+        setDashboard(dashboardImgBlue)
+        setLeftTextDashboard("left-text-color")
+
+    }else if (halaman === 'transfer') {
+        setTransfer(transferImgBlue)
+        setLeftTextTransfer("left-text-color")
+    }else if (halaman === 'profile'){
+      setProfile(profileImgBlue)
+      setLeftTextProfile('left-text-color')
     }
   }
 
