@@ -22,6 +22,7 @@ import { InNotifBox, NotifBox } from "../../styles/HomeLayouts/Box/NotifStyle";
 import TransactionBox2 from "../../components/TransactionBox/TransactionBox2";
 import defaultPhoto from "../../Assets/defaultPhoto.jpg";
 import { getPhoto } from "../../services/ProfilService";
+import { getUserbyEmail } from "../../services/UserService";
 
 const HomeLayouts = (props) => {
   const { children, halaman } = props;
@@ -37,10 +38,13 @@ const HomeLayouts = (props) => {
   const [leftTextLogout, setLeftTextLogout] = useState("left-text");
   const [display, setDisplay] = useState("none");
   const [foto, setFoto] = useState("");
+  const [nama, setNama] = useState();
+  const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
 
   useEffect(() => {
     checkHalaman();
     getPhotoProfil();
+    getUserData();
   }, []);
 
   function notifButton() {
@@ -49,6 +53,14 @@ const HomeLayouts = (props) => {
     } else {
       setDisplay("none");
     }
+  }
+
+  const getUserData = async() =>{
+    const response = await getUserbyEmail();
+    setNama(response.data.data.nama);
+    if(response.data.data.noTelp != null){
+      setNoTelp(response.data.data.noTelp);
+    } 
   }
 
   const getPhotoProfil = async () => {
@@ -127,8 +139,8 @@ const HomeLayouts = (props) => {
           <div className="identity-box">
             <img className="image-user" src={foto?foto:defaultPhoto} alt="foto" />
             <div className="text-box">
-              <p className="name">Ragil</p>
-              <p className="phone-number">089 0020 2022</p>
+              <p className="name">{nama}</p>
+              <p className="phone-number">{noTelp}</p>
             </div>
             <button className="bell-button" onClick={notifButton}>
               <i className="fa fa-bell"></i>

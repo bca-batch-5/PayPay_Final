@@ -15,15 +15,19 @@ import defaultFoto from "../Assets/defaultPhoto.jpg";
 import { useState } from "react";
 import { getPhoto, ProfilService } from "../services/ProfilService";
 import { useEffect } from "react";
+import { getUserbyEmail } from "../services/UserService";
 
 export const Profile = () => {
   const [editClicked, setEditClicked] = useState();
   const [clicked, setClicked] = useState(false);
   const [fileValue, setFileValue] = useState();
   const [foto, setFoto] = useState("");
+  const [nama, setNama] = useState();
+  const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
 
   useEffect(() => {
     getPhotoProfil();
+    getUserData();
   });
 
   const editHandler = () => {
@@ -35,6 +39,14 @@ export const Profile = () => {
       setClicked(false);
     }
   };
+
+  const getUserData = async() =>{
+    const response = await getUserbyEmail();
+    setNama(response.data.data.nama);
+    if(response.data.data.noTelp != null){
+      setNoTelp(response.data.data.noTelp);
+    } 
+  }
 
   const getPhotoProfil = async () => {
     const url = await getPhoto();
@@ -53,7 +65,6 @@ export const Profile = () => {
     let formData = new FormData();
     formData.append("file", fileValue);
     const res = await ProfilService(formData);
-    console.log(res);
     getPhotoProfil();
   };
 
@@ -77,8 +88,8 @@ export const Profile = () => {
                 <button>Submit</button>
               </form>
             </div>
-            <div className="name-text">Nama</div>
-            <div className="nomor-telpon">Nomor Telfon</div>
+            <div className="name-text">{nama}</div>
+            <div className="nomor-telpon">{noTelp}</div>
           </BorderDalamProfil>
           <Link to={"/personal-information"} className="text-link">
             <BorderPilihan className="border-pilihan">

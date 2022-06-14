@@ -12,9 +12,8 @@ export const ProfilService = async (data) => {
     data,
     headers,
   });
-  console.log(response.data.data.fileName);
-  const imageName = response.data.data.fileName;
-  return imageName;
+  console.log(response);
+  return response;
 };
 
 export const getPhoto = async () => {
