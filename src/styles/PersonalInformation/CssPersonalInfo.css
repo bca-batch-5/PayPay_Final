@@ -1,0 +1,45 @@
+.text-personal-info {
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
+}
+.text-personal-desc {
+  width: 340px;
+  margin: 30px 0px;
+}
+.text-placeholder {
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  color: #7a7886;
+}
+.text-value {
+  margin-top: 10px;
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 30px;
+  color: #514f5b;
+}
+.text-manage {
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  color: #6379f4;
+}
+.border-text-notelp-profil {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.text-link {
+  text-decoration: none;
+}

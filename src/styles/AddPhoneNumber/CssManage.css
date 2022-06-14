@@ -1,0 +1,67 @@
+.text-info {
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
+}
+.text-manage-desc {
+  width: 350px;
+  margin: 30px 0px;
+}
+.border-form-telp-dalam {
+  width: 433px;
+  margin-bottom: 60px;
+  border-bottom: 1.5px solid rgba(169, 169, 169, 0.6);
+  padding-bottom: 5px;
+}
+.border-form-telp-dalam-clicked{
+  border-bottom: 1px blue solid;
+}
+.space-form-telp {
+  margin-right: 5px;
+}
+.text-62 {
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+  color: #3a3d42;
+}
+.input-telp {
+  border: transparent;
+  outline: none;
+  width: 80%;
+}
+.border-menu-button-add {
+  width: 433px;
+  height: 64px;
+  background: #e5e8ed;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #88888f;
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+  transition: all 1s ease;
+}
+.border-menu-button-add:hover{
+  cursor: not-allowed;
+}
+.border-menu-button-add-exist{
+  
+  background-color:#6379F4;
+  color: white;
+}
+
+.border-menu-button-add-exist:hover{
+  cursor: pointer;
+}

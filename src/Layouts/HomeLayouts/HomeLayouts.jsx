@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbox, InNavbox } from "../../styles/HomeLayouts/Navbar/StyleNavbar";
 import people3 from "../../Assets/Foto3.jpg";
 import "../../styles/HomeLayouts/Navbar/styleNavbar.css";
@@ -20,6 +20,7 @@ import logoutImg from "../../Assets/log-out.png";
 import { Link } from "react-router-dom";
 import { InNotifBox, NotifBox } from "../../styles/HomeLayouts/Box/NotifStyle";
 import TransactionBox2 from "../../components/TransactionBox/TransactionBox2";
+import defaultPhoto from "../../Assets/defaultPhoto.jpg";
 
 const HomeLayouts = (props) => {
   const { children, halaman } = props;
@@ -34,6 +35,7 @@ const HomeLayouts = (props) => {
   const [leftTextProfile, setLeftTextProfile] = useState("left-text");
   const [leftTextLogout, setLeftTextLogout] = useState("left-text");
   const [display, setDisplay] = useState("none");
+  const [photo, setPhoto] = useState(defaultPhoto);
 
   function notifButton() {
     if (display === "none") {
@@ -48,7 +50,7 @@ const HomeLayouts = (props) => {
     setLeftTextDashboard("left-text-color");
   }
   function dashboardLeave() {
-    if (halaman != 'home') {
+    if (halaman != "home") {
       setDashboard(dashboardImg);
       setLeftTextDashboard("left-text");
     }
@@ -59,7 +61,7 @@ const HomeLayouts = (props) => {
     setLeftTextTransfer("left-text-color");
   }
   function transferLeave() {
-    if (halaman != 'transfer') {
+    if (halaman != "transfer") {
       setTransfer(transferImg);
       setLeftTextTransfer("left-text");
     }
@@ -91,30 +93,29 @@ const HomeLayouts = (props) => {
     setLeftTextLogout("left-text");
   }
 
-  function checkHalaman(){
-    if (halaman === 'home') {
-        setDashboard(dashboardImgBlue)
-        setLeftTextDashboard("left-text-color")
-
-    }else if (halaman === 'transfer') {
-        setTransfer(transferImgBlue)
-        setLeftTextTransfer("left-text-color")
+  function checkHalaman() {
+    if (halaman === "home") {
+      setDashboard(dashboardImgBlue);
+      setLeftTextDashboard("left-text-color");
+    } else if (halaman === "transfer") {
+      setTransfer(transferImgBlue);
+      setLeftTextTransfer("left-text-color");
     }
   }
 
   useEffect(() => {
-    checkHalaman()
-    }
-  , [])
-  
+    checkHalaman();
+  }, []);
 
   return (
     <div className="layouts-box" id={halaman}>
       <Navbox>
         <InNavbox>
-          <h3 className="title">PayPay</h3>
+          <Link to={"/home"} className="title">
+            PayPay
+          </Link>
           <div className="identity-box">
-            <img className="image-user" src={people3} alt="foto" />
+            <img className="image-user" src={defaultPhoto} alt="foto" />
             <div className="text-box">
               <p className="name">Ragil</p>
               <p className="phone-number">089 0020 2022</p>
@@ -128,8 +129,8 @@ const HomeLayouts = (props) => {
       <div className="main-layouts">
         <NotifBox display={display}>
           <InNotifBox>
-              <p style={{ color: "#7A7886", fontSize: "15px" }}>Today</p>
-            <div style={{ marginTop: "10px", overflowY:'scroll'}}>
+            <p style={{ color: "#7A7886", fontSize: "15px" }}>Today</p>
+            <div style={{ marginTop: "10px", overflowY: "scroll" }}>
               <TransactionBox2
                 tipe="kredit"
                 description="Transfered from Joshua Lee"
@@ -147,8 +148,8 @@ const HomeLayouts = (props) => {
               />
             </div>
             <br />
-              <p style={{ color: "#7A7886", fontSize: "15px" }}>This Week</p>
-            <div style={{ marginTop: "10px", overflowY:'scroll' }}>
+            <p style={{ color: "#7A7886", fontSize: "15px" }}>This Week</p>
+            <div style={{ marginTop: "10px", overflowY: "scroll" }}>
               <TransactionBox2
                 tipe="kredit"
                 description="Transfered from Joshua Lee"
@@ -198,7 +199,7 @@ const HomeLayouts = (props) => {
             <div className="left-box-text">
               <img src={topup} alt="top up" />
               <Link
-                to={"#"}
+                to={"/topup"}
                 className={leftTextTopup}
                 onMouseEnter={topupEnter}
                 onMouseLeave={topupLeave}
@@ -212,7 +213,7 @@ const HomeLayouts = (props) => {
               <div className="left-box-text">
                 <img src={profile} alt="" />
                 <Link
-                  to={"#"}
+                  to={"/profil"}
                   className={leftTextProfile}
                   onMouseEnter={profileEnter}
                   onMouseLeave={profileLeave}

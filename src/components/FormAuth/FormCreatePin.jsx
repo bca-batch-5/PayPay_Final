@@ -91,10 +91,6 @@ const FormCreatePin = (props) => {
     }
   }
 
-  function lastInput(e) {
-    return /[0-9]/i.test(e.key);
-  }
-
   return (
     <div className={formDisplay}>
       <div id="formBox" className={formHide}>
@@ -151,7 +147,7 @@ const FormCreatePin = (props) => {
               maxLength="1"
               id="six"
               onInput={sixInputHandler}
-              onKeyPress={lastInput}
+              onKeyPress={pressHandler}
             />
           </div>
           <p id="alert" className={`alert-message ${alertMessagePin}`}>

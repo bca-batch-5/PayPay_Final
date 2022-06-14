@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../../styles/Form/FormLogin.css";
 import { BorderInput } from "./FormLoginStyle";
 import "../../styles/Form/ManipulationForm.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthService } from "../../services/AuthService";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const FormLogin = (props) => {
   const { formValid, pageValid } = props;
@@ -22,6 +24,7 @@ export const FormLogin = (props) => {
 
   const [buttonLogin, setButtonLogin] = useState();
   const [linkClick, setLinkClick] = useState("#");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (formValid === false) {
@@ -39,12 +42,24 @@ export const FormLogin = (props) => {
     };
     try {
       const res = await AuthService(data);
-      if(res.data.message === "Bad credentials"){
+      if (res.data.status === 201) {
+        setTimeout(() => navigate("/home"), 2000);
+        toast.success("Login Berhasil", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      if (res.data.message === "Bad credentials") {
         setIconClassPass("icon-red");
         setInputValidPass("input-failed");
         setAlertMessagePassword("wrong-pass-display");
       }
-      if(res.data.message === "Email tidak terdaftar"){
+      if (res.data.message === "Email tidak terdaftar") {
         setIconClassEmail("icon-red");
         setInputValidEmail("input-failed");
         setAlertMessage("wrong-pass-display");
@@ -99,7 +114,6 @@ export const FormLogin = (props) => {
       setIconEyes("fa-eye-slash");
     }
   }
-
 
   function btnChange(e) {
     if (e.target.value === "") {
@@ -165,6 +179,17 @@ export const FormLogin = (props) => {
           Login
         </button>
       </form>
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
     </div>
   );
 };
