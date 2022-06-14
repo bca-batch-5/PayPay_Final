@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import { InNotifBox, NotifBox } from "../../styles/HomeLayouts/Box/NotifStyle";
 import TransactionBox2 from "../../components/TransactionBox/TransactionBox2";
 import defaultPhoto from "../../Assets/defaultPhoto.jpg";
+import { getPhoto } from "../../services/ProfilService";
 
 const HomeLayouts = (props) => {
   const { children, halaman } = props;
@@ -35,7 +36,12 @@ const HomeLayouts = (props) => {
   const [leftTextProfile, setLeftTextProfile] = useState("left-text");
   const [leftTextLogout, setLeftTextLogout] = useState("left-text");
   const [display, setDisplay] = useState("none");
-  const [photo, setPhoto] = useState(defaultPhoto);
+  const [foto, setFoto] = useState("");
+
+  useEffect(() => {
+    checkHalaman();
+    getPhotoProfil();
+  }, []);
 
   function notifButton() {
     if (display === "none") {
@@ -44,6 +50,12 @@ const HomeLayouts = (props) => {
       setDisplay("none");
     }
   }
+
+  const getPhotoProfil = async () => {
+    const url = await getPhoto();
+    console.log("link: ", url);
+    setFoto(url);
+  };
 
   function dashboardEnter() {
     setDashboard(dashboardImgBlue);
@@ -103,9 +115,7 @@ const HomeLayouts = (props) => {
     }
   }
 
-  useEffect(() => {
-    checkHalaman();
-  }, []);
+  
 
   return (
     <div className="layouts-box" id={halaman}>
@@ -115,7 +125,7 @@ const HomeLayouts = (props) => {
             PayPay
           </Link>
           <div className="identity-box">
-            <img className="image-user" src={defaultPhoto} alt="foto" />
+            <img className="image-user" src={foto?foto:defaultPhoto} alt="foto" />
             <div className="text-box">
               <p className="name">Ragil</p>
               <p className="phone-number">089 0020 2022</p>

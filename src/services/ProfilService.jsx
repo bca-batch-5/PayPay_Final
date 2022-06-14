@@ -12,16 +12,20 @@ export const ProfilService = async (data) => {
     data,
     headers,
   });
+  console.log(response.data.data.fileName);
+  const imageName = response.data.data.fileName;
+  return imageName;
 };
 
 export const getPhoto = async () => {
   const email = getEmail();
   const url = `${API_PAYPAY}/img/${email}`;
-  const headers = getHeaders();
-  const response = await Api({
-    url,
-    method: "get",
-    headers,
-  });
-  console.log(response);
+  // const headers = getHeaders();
+  // const response = await Api({
+  //   url,
+  //   method: "get",
+  //   headers,
+  // });
+  return url;
 };
+

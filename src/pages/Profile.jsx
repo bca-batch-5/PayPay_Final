@@ -14,63 +14,69 @@ import { Link } from "react-router-dom";
 import defaultFoto from "../Assets/defaultPhoto.jpg";
 import { useState } from "react";
 import { getPhoto, ProfilService } from "../services/ProfilService";
+import { useEffect } from "react";
 
 export const Profile = () => {
   const [editClicked, setEditClicked] = useState();
   const [clicked, setClicked] = useState(false);
   const [fileValue, setFileValue] = useState();
-  const [foto, setFoto] = useState(defaultFoto);
+  const [foto, setFoto] = useState("");
 
-  const editHandler = () =>{
-    if(clicked == false){
-    setEditClicked("border-file-input-clicked");
-    setClicked(true);
-    }else{
+  useEffect(() => {
+    getPhotoProfil();
+  });
+
+  const editHandler = () => {
+    if (clicked == false) {
+      setEditClicked("border-file-input-clicked");
+      setClicked(true);
+    } else {
       setEditClicked("");
       setClicked(false);
-    } 
-  }
+    }
+  };
 
-  const getPhotoProfil = async() =>{
-    const res = await getPhoto();
-    console.log("response get foto: ", res);
-  }
+  const getPhotoProfil = async () => {
+    const url = await getPhoto();
+    console.log("link: ", url);
+    setFoto(url);
+  };
 
-  const getImageValue = (e) =>{
-    e.preventDefault();
+  const getImageValue = (e) => {
     const [f] = e.target.files;
     setFileValue(f);
     console.log("isi inputan", f.name);
-    
-  }
+  };
 
-  const imageInput = async (e) =>{
+  const imageInput = async (e) => {
     e.preventDefault();
     let formData = new FormData();
     formData.append("file", fileValue);
     const res = await ProfilService(formData);
-    console.log("data response api upload", res);
+    console.log(res);
     getPhotoProfil();
-  }
+  };
 
   return (
     <HomeLayouts>
       <RightBox>
         <div className="border-mid">
           <BorderDalamProfil>
-            <BorderGambar photo={defaultFoto}></BorderGambar>
+            <BorderGambar photo={foto ? foto : defaultFoto}></BorderGambar>
             <div className="Border-Edit-text">
               <span>
                 <img src={pencil} alt="Edit" />
               </span>
-              <span className="edit-text" onClick={editHandler}>Edit</span>
+              <span className="edit-text" onClick={editHandler}>
+                Edit
+              </span>
             </div>
             <div className={`border-file-input ${editClicked}`}>
-                <form onSubmit={imageInput}>
-                  <input type="file" multiple={false} onChange={getImageValue}/>
-                  <button>Submit</button>
-                </form>
-              </div>
+              <form onSubmit={imageInput}>
+                <input type="file" multiple={false} onChange={getImageValue} />
+                <button>Submit</button>
+              </form>
+            </div>
             <div className="name-text">Nama</div>
             <div className="nomor-telpon">Nomor Telfon</div>
           </BorderDalamProfil>
