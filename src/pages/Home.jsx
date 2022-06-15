@@ -14,6 +14,7 @@ import { getUserbyEmail } from "../services/UserService";
 const Home = () => {
   const [balance, setBalance] = useState();
   const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
+  const [foto, setFoto] = useState("");
   useEffect(() => {
     getUserData();
   },[]);
@@ -27,7 +28,7 @@ const Home = () => {
     }
   };
   return (
-    <HomeLayouts halaman="home">
+    <HomeLayouts halaman="home" photoProfile={foto}>
       <div className="box-kanan-all">
         <div className="box-kanan-biru">
           <div className="in-box-kanan-biru">

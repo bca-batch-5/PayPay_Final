@@ -43,9 +43,12 @@ const HomeLayouts = (props) => {
 
   useEffect(() => {
     checkHalaman();
-    getPhotoProfil();
+    if (localStorage.getItem("photo") != null) {
+      setFoto(localStorage.getItem("photo"));
+    }
     getUserData();
-  },[]);
+    console.log(localStorage.getItem("photo"));
+  });
 
   function notifButton() {
     if (display === "none") {
@@ -55,19 +58,19 @@ const HomeLayouts = (props) => {
     }
   }
 
-  const getUserData = async() =>{
+  const getUserData = async () => {
     const response = await getUserbyEmail();
     setNama(response.data.data.nama);
-    if(response.data.data.noTelp != null){
+    if (response.data.data.noTelp != null) {
       setNoTelp(response.data.data.noTelp);
-    } 
-  }
-
-  const getPhotoProfil = async () => {
-    const url = await getPhoto();
-    console.log("link: ", url);
-    setFoto(url);
+    }
   };
+
+  // const getPhotoProfil = async () => {
+  //   const url = await getPhoto();
+  //   console.log("link: ", url);
+  //   setFoto(url);
+  // };
 
   function dashboardEnter() {
     setDashboard(dashboardImgBlue);
@@ -117,22 +120,18 @@ const HomeLayouts = (props) => {
     setLeftTextLogout("left-text");
   }
 
-
-  function checkHalaman(){
-    if (halaman === 'home') {
-        setDashboard(dashboardImgBlue)
-        setLeftTextDashboard("left-text-color")
-
-    }else if (halaman === 'transfer') {
-        setTransfer(transferImgBlue)
-        setLeftTextTransfer("left-text-color")
-    }else if (halaman === 'profile'){
-      setProfile(profileImgBlue)
-      setLeftTextProfile('left-text-color')
+  function checkHalaman() {
+    if (halaman === "home") {
+      setDashboard(dashboardImgBlue);
+      setLeftTextDashboard("left-text-color");
+    } else if (halaman === "transfer") {
+      setTransfer(transferImgBlue);
+      setLeftTextTransfer("left-text-color");
+    } else if (halaman === "profile") {
+      setProfile(profileImgBlue);
+      setLeftTextProfile("left-text-color");
     }
   }
-
-  
 
   return (
     <div className="layouts-box" id={halaman}>
@@ -142,7 +141,11 @@ const HomeLayouts = (props) => {
             PayPay
           </Link>
           <div className="identity-box">
-            <img className="image-user" src={foto?foto:defaultPhoto} alt="foto" />
+            <img
+              className="image-user"
+              src={foto ? foto : defaultPhoto}
+              alt="foto"
+            />
             <div className="text-box">
               <p className="name">{nama}</p>
               <p className="phone-number">{noTelp}</p>

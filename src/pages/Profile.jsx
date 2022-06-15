@@ -30,7 +30,7 @@ export const Profile = () => {
     getPhotoProfil();
     getUserData();
     console.log(foto);
-  });
+  },[]);
 
   // const setFotoToLocal = () => {
   //   localStorage.setItem("photo", foto);
@@ -58,8 +58,9 @@ export const Profile = () => {
     const url = await getPhoto();
     if (url === null) {
       setFoto(defaultFoto);
+      localStorage.setItem("photo", defaultFoto);
     } else {
-      setFoto(localStorage.getItem("photo"));
+      setFoto(url);
     }
   },[]);
 
@@ -74,9 +75,9 @@ export const Profile = () => {
     let formData = new FormData();
     formData.append("file", fileValue);
     const res = await ProfilService(formData);
-    setFoto(res.data.data.url);
-    localStorage.setItem("photo", res.data.data.url);
-    getPhotoProfil();
+    setFoto(res.data.data.url + '?' + Math.random());
+    localStorage.setItem("photo", res.data.data.url + '?' + Math.random());
+    console.log(foto);
   };
 
   return (
