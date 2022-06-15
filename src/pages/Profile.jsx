@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import RightBox from "../components/RightBox/RightBox";
 import HomeLayouts from "../Layouts/HomeLayouts/HomeLayouts";
 import pencil from "../Assets/pencil.png";
@@ -28,7 +28,12 @@ export const Profile = () => {
   useEffect(() => {
     getPhotoProfil();
     getUserData();
-  });
+    console.log(foto);
+  },[]);
+
+  // const setFotoToLocal = () => {
+  //   localStorage.setItem("photo", foto);
+  // };
 
   const editHandler = () => {
     if (clicked == false) {
@@ -40,19 +45,23 @@ export const Profile = () => {
     }
   };
 
-  const getUserData = async() =>{
+  const getUserData = async () => {
     const response = await getUserbyEmail();
     setNama(response.data.data.nama);
-    if(response.data.data.noTelp != null){
+    if (response.data.data.noTelp != null) {
       setNoTelp(response.data.data.noTelp);
-    } 
-  }
-
-  const getPhotoProfil = async () => {
-    const url = await getPhoto();
-    console.log("link: ", url);
-    setFoto(url);
+    }
   };
+
+  const getPhotoProfil = useCallback(async () => {
+    const url = await getPhoto();
+    if (url === null) {
+      setFoto(defaultFoto);
+      localStorage.setItem("photo", defaultFoto);
+    } else {
+      setFoto(url);
+    }
+  },[]);
 
   const getImageValue = (e) => {
     const [f] = e.target.files;
@@ -65,15 +74,17 @@ export const Profile = () => {
     let formData = new FormData();
     formData.append("file", fileValue);
     const res = await ProfilService(formData);
-    getPhotoProfil();
+    setFoto(res.data.data.url + '?' + Math.random());
+    localStorage.setItem("photo", res.data.data.url + '?' + Math.random());
+    console.log(foto);
   };
 
   return (
-    <HomeLayouts>
+    <HomeLayouts photoProfile={foto}>
       <RightBox>
         <div className="border-mid">
           <BorderDalamProfil>
-            <BorderGambar photo={foto ? foto : defaultFoto}></BorderGambar>
+            <BorderGambar photo={foto}></BorderGambar>
             <div className="Border-Edit-text">
               <span>
                 <img src={pencil} alt="Edit" />

@@ -18,7 +18,7 @@ export const PersonalInformation = () => {
     setNama(response.data.data.nama);
     setEmail(response.data.data.user.email);
     if (response.data.data.noTelp != null) {
-      setNoTelp(response.data.data.noTelp);
+      setNoTelp("+62" + response.data.data.noTelp);
     }
   };
   return (

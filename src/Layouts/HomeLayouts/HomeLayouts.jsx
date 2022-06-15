@@ -17,7 +17,7 @@ import topupImgBlue from "../../Assets/plus-biru.png";
 import profileImg from "../../Assets/user.png";
 import profileImgBlue from "../../Assets/user-biru.png";
 import logoutImg from "../../Assets/log-out.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InNotifBox, NotifBox } from "../../styles/HomeLayouts/Box/NotifStyle";
 import TransactionBox2 from "../../components/TransactionBox/TransactionBox2";
 import defaultPhoto from "../../Assets/defaultPhoto.jpg";
@@ -25,7 +25,7 @@ import { getPhoto } from "../../services/ProfilService";
 import { getUserbyEmail } from "../../services/UserService";
 
 const HomeLayouts = (props) => {
-  const { children, halaman } = props;
+  const { children, halaman, nomorTelfon, photoProfile } = props;
   const [dashboard, setDashboard] = useState(dashboardImg);
   const [transfer, setTransfer] = useState(transferImg);
   const [topup, setTopup] = useState(topupImg);
@@ -39,13 +39,25 @@ const HomeLayouts = (props) => {
   const [display, setDisplay] = useState("none");
   const [foto, setFoto] = useState("");
   const [nama, setNama] = useState();
-  const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
+  const [noTelp, setNoTelp] = useState("Nomor Telpon belum ada");
+  const navigate = useNavigate();
 
   useEffect(() => {
     checkHalaman();
-    getPhotoProfil();
     getUserData();
+    getPhotoProfil();
+    checkingTokenAvailable();
+    console.log(photoProfile);
   }, []);
+
+  const getPhotoProfil = async () => {
+    const url = await getPhoto();
+    if (url === null) {
+      setFoto(defaultPhoto);
+    } else {
+      setFoto(url + "?" + Math.random());
+    }
+  };
 
   function notifButton() {
     if (display === "none") {
@@ -54,19 +66,17 @@ const HomeLayouts = (props) => {
       setDisplay("none");
     }
   }
+  const logoutHandler = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("photo");
+  };
 
-  const getUserData = async() =>{
+  const getUserData = async () => {
     const response = await getUserbyEmail();
     setNama(response.data.data.nama);
-    if(response.data.data.noTelp != null){
-      setNoTelp(response.data.data.noTelp);
-    } 
-  }
-
-  const getPhotoProfil = async () => {
-    const url = await getPhoto();
-    console.log("link: ", url);
-    setFoto(url);
+    if (response.data.data.noTelp != null) {
+      setNoTelp("+62" + response.data.data.noTelp);
+    }
   };
 
   function dashboardEnter() {
@@ -117,22 +127,25 @@ const HomeLayouts = (props) => {
     setLeftTextLogout("left-text");
   }
 
-
-  function checkHalaman(){
-    if (halaman === 'home') {
-        setDashboard(dashboardImgBlue)
-        setLeftTextDashboard("left-text-color")
-
-    }else if (halaman === 'transfer') {
-        setTransfer(transferImgBlue)
-        setLeftTextTransfer("left-text-color")
-    }else if (halaman === 'profile'){
-      setProfile(profileImgBlue)
-      setLeftTextProfile('left-text-color')
+  function checkHalaman() {
+    if (halaman === "home") {
+      setDashboard(dashboardImgBlue);
+      setLeftTextDashboard("left-text-color");
+    } else if (halaman === "transfer") {
+      setTransfer(transferImgBlue);
+      setLeftTextTransfer("left-text-color");
+    } else if (halaman === "profile") {
+      setProfile(profileImgBlue);
+      setLeftTextProfile("left-text-color");
     }
   }
 
-  
+  function checkingTokenAvailable() {
+    const token = localStorage.getItem("user");
+    if(token == null){
+      navigate("/");
+    }
+  }
 
   return (
     <div className="layouts-box" id={halaman}>
@@ -142,10 +155,16 @@ const HomeLayouts = (props) => {
             PayPay
           </Link>
           <div className="identity-box">
-            <img className="image-user" src={foto?foto:defaultPhoto} alt="foto" />
+            <img
+              className="image-user"
+              src={photoProfile ? photoProfile : foto}
+              alt="foto"
+            />
             <div className="text-box">
               <p className="name">{nama}</p>
-              <p className="phone-number">{noTelp}</p>
+              <p className="phone-number">
+                {nomorTelfon ? nomorTelfon : noTelp}
+              </p>
             </div>
             <button className="bell-button" onClick={notifButton}>
               <i className="fa fa-bell"></i>
@@ -252,10 +271,11 @@ const HomeLayouts = (props) => {
               <div className="left-box-text">
                 <img src={logout} alt="" />
                 <Link
-                  to={"#"}
+                  to={"/"}
                   className={leftTextLogout}
                   onMouseEnter={logoutEnter}
                   onMouseLeave={logoutLeave}
+                  onClick={logoutHandler}
                 >
                   <p>Log out</p>
                 </Link>

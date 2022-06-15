@@ -10,7 +10,7 @@ export const ProfilService = async (data) => {
     url,
     method: "post",
     data,
-    headers,
+    headers
   });
   console.log(response);
   return response;
@@ -19,12 +19,39 @@ export const ProfilService = async (data) => {
 export const getPhoto = async () => {
   const email = getEmail();
   const url = `${API_PAYPAY}/img/${email}`;
-  // const headers = getHeaders();
-  // const response = await Api({
-  //   url,
-  //   method: "get",
-  //   headers,
-  // });
+  const response = await Api({
+    url,
+    method: "get",
+  });
+  if(response.data.status === 500){
+    return null;
+  }
   return url;
 };
 
+export const addPhoneNumber = async (data) => {
+  const email = getEmail();
+  const url = `${API_PAYPAY}/add-phone/${email}`;
+  const headers = getHeaders();
+  const response = await Api({
+    url,
+    method: "post",
+    data,
+    headers
+  });
+  console.log(response);
+  return response;
+};
+
+export const deletePhoneNumber = async () => {
+  const email = getEmail();
+  const url = `${API_PAYPAY}/delete-phone/${email}`;
+  const headers = getHeaders();
+  const response = await Api({
+    url,
+    method: "delete",
+    headers
+  });
+  console.log(response);
+  return response;
+};

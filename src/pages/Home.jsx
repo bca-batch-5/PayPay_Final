@@ -14,20 +14,21 @@ import { getUserbyEmail } from "../services/UserService";
 const Home = () => {
   const [balance, setBalance] = useState();
   const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
+  const [foto, setFoto] = useState("");
   useEffect(() => {
     getUserData();
-  },[]);
+  }, []);
 
   const getUserData = async () => {
     const response = await getUserbyEmail();
     console.log(response);
     setBalance(response.data.data.saldo);
     if (response.data.data.noTelp != null) {
-      setNoTelp(response.data.data.noTelp);
+      setNoTelp("+62" + response.data.data.noTelp);
     }
   };
   return (
-    <HomeLayouts halaman="home">
+    <HomeLayouts halaman="home" photoProfile={foto}>
       <div className="box-kanan-all">
         <div className="box-kanan-biru">
           <div className="in-box-kanan-biru">
@@ -35,7 +36,8 @@ const Home = () => {
               <p style={{ color: "#E0E0E0", fontSize: "25px" }}>Balance</p>
               <br />
               <p style={{ color: "White", fontSize: "40px" }}>
-                <span>Rp.</span>{balance}
+                <span>Rp.</span>
+                {balance}
               </p>
               <br />
               <p style={{ color: "#E0E0E0", fontSize: "15px" }}>{noTelp}</p>
