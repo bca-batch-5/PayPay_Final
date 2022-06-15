@@ -98,7 +98,7 @@ const ChangePassword = () => {
           You must enter your current password and then type your new password
           twice.
         </p>
-        <form className="form-box">
+        <form className="form-password-box">
           <div className={passwordBox1}>
             <div className="in-password-box">
               <i className={`fa fa-lock ${lock1} `}></i>
