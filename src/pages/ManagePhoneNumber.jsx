@@ -1,18 +1,34 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import deleteTrash from "../Assets/trash.png";
 import RightBox from "../components/RightBox/RightBox";
 import HomeLayouts from "../Layouts/HomeLayouts/HomeLayouts";
-import { BorderInfo } from "../styles/PersonalInformation/StylePersonalInfo";
-import deleteTrash from "../Assets/trash.png";
+import { deletePhoneNumber } from "../services/ProfilService";
+import { getUserbyEmail } from "../services/UserService";
 import "../styles/ManagePhoneNumber/CssManagePhone.css";
+import { BorderInfo } from "../styles/PersonalInformation/StylePersonalInfo";
 
 export const ManagePhoneNumber = () => {
-  const [phoneNumber, setPhoneNumber] = useState("085920359733");
+  const [phoneNumber, setPhoneNumber] = useState("Nomor Telpon belum ada");
 
-  function deleteHandler() {
-    setPhoneNumber("Phone Number is Empty, Please Fill your Phone Number");
+  useEffect(() => {
+    getUserData();
+  });
+
+  const deleteHandler= async(e) => {
+    e.preventDefault();
+   const res = await deletePhoneNumber();
+   setPhoneNumber("Nomor Telpon belum ada");
+   console.log("dari manage phone", res);
   }
+
+  const getUserData = async () => {
+    const response = await getUserbyEmail();
+    if (response.data.data.noTelp != null) {
+      setPhoneNumber("+62" + response.data.data.noTelp);
+    }
+  };
   return (
-    <HomeLayouts>
+    <HomeLayouts nomorTelfon ={phoneNumber}>
       <RightBox>
         <div className="text-info">Manage Phone Number</div>
         <div className="text-manage-desc">

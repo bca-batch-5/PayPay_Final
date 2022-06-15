@@ -23,7 +23,6 @@ export const Profile = () => {
   const [fileValue, setFileValue] = useState();
   const [foto, setFoto] = useState("");
   const [nama, setNama] = useState();
-  const [tempPhoto, setTempPhoto] = useState();
   const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
 
   useEffect(() => {
@@ -81,7 +80,7 @@ export const Profile = () => {
   };
 
   return (
-    <HomeLayouts>
+    <HomeLayouts photoProfile={foto}>
       <RightBox>
         <div className="border-mid">
           <BorderDalamProfil>

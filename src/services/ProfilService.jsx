@@ -10,7 +10,7 @@ export const ProfilService = async (data) => {
     url,
     method: "post",
     data,
-    headers,
+    headers
   });
   console.log(response);
   return response;
@@ -19,11 +19,9 @@ export const ProfilService = async (data) => {
 export const getPhoto = async () => {
   const email = getEmail();
   const url = `${API_PAYPAY}/img/${email}`;
-  const headers = getHeaders();
   const response = await Api({
     url,
     method: "get",
-    headers,
   });
   if(response.data.status === 500){
     return null;
@@ -31,14 +29,29 @@ export const getPhoto = async () => {
   return url;
 };
 
-// export const checkingPhoto = async () => {
-//   const email = getEmail();
-//   const url = `${API_PAYPAY}/img/${email}`;
-//   const response = await Api({
-//     url,
-//     method: "get",
-//   });
-//   console.log(response);
-//   return response;
-// };
+export const addPhoneNumber = async (data) => {
+  const email = getEmail();
+  const url = `${API_PAYPAY}/add-phone/${email}`;
+  const headers = getHeaders();
+  const response = await Api({
+    url,
+    method: "post",
+    data,
+    headers
+  });
+  console.log(response);
+  return response;
+};
 
+export const deletePhoneNumber = async () => {
+  const email = getEmail();
+  const url = `${API_PAYPAY}/delete-phone/${email}`;
+  const headers = getHeaders();
+  const response = await Api({
+    url,
+    method: "delete",
+    headers
+  });
+  console.log(response);
+  return response;
+};
