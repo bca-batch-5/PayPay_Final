@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import RightBox from "../components/RightBox/RightBox";
 import HomeLayouts from "../Layouts/HomeLayouts/HomeLayouts";
 import pencil from "../Assets/pencil.png";
@@ -23,12 +23,18 @@ export const Profile = () => {
   const [fileValue, setFileValue] = useState();
   const [foto, setFoto] = useState("");
   const [nama, setNama] = useState();
+  const [tempPhoto, setTempPhoto] = useState();
   const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
 
   useEffect(() => {
     getPhotoProfil();
     getUserData();
+    console.log(foto);
   });
+
+  // const setFotoToLocal = () => {
+  //   localStorage.setItem("photo", foto);
+  // };
 
   const editHandler = () => {
     if (clicked == false) {
@@ -40,19 +46,22 @@ export const Profile = () => {
     }
   };
 
-  const getUserData = async() =>{
+  const getUserData = async () => {
     const response = await getUserbyEmail();
     setNama(response.data.data.nama);
-    if(response.data.data.noTelp != null){
+    if (response.data.data.noTelp != null) {
       setNoTelp(response.data.data.noTelp);
-    } 
-  }
-
-  const getPhotoProfil = async () => {
-    const url = await getPhoto();
-    console.log("link: ", url);
-    setFoto(url);
+    }
   };
+
+  const getPhotoProfil = useCallback(async () => {
+    const url = await getPhoto();
+    if (url === null) {
+      setFoto(defaultFoto);
+    } else {
+      setFoto(localStorage.getItem("photo"));
+    }
+  },[]);
 
   const getImageValue = (e) => {
     const [f] = e.target.files;
@@ -65,6 +74,8 @@ export const Profile = () => {
     let formData = new FormData();
     formData.append("file", fileValue);
     const res = await ProfilService(formData);
+    setFoto(res.data.data.url);
+    localStorage.setItem("photo", res.data.data.url);
     getPhotoProfil();
   };
 
@@ -73,7 +84,7 @@ export const Profile = () => {
       <RightBox>
         <div className="border-mid">
           <BorderDalamProfil>
-            <BorderGambar photo={foto ? foto : defaultFoto}></BorderGambar>
+            <BorderGambar photo={foto}></BorderGambar>
             <div className="Border-Edit-text">
               <span>
                 <img src={pencil} alt="Edit" />

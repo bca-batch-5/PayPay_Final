@@ -45,7 +45,7 @@ const HomeLayouts = (props) => {
     checkHalaman();
     getPhotoProfil();
     getUserData();
-  }, []);
+  },[]);
 
   function notifButton() {
     if (display === "none") {

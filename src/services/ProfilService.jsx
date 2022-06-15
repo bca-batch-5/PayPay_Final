@@ -19,12 +19,26 @@ export const ProfilService = async (data) => {
 export const getPhoto = async () => {
   const email = getEmail();
   const url = `${API_PAYPAY}/img/${email}`;
-  // const headers = getHeaders();
-  // const response = await Api({
-  //   url,
-  //   method: "get",
-  //   headers,
-  // });
+  const headers = getHeaders();
+  const response = await Api({
+    url,
+    method: "get",
+    headers,
+  });
+  if(response.data.status === 500){
+    return null;
+  }
   return url;
 };
+
+// export const checkingPhoto = async () => {
+//   const email = getEmail();
+//   const url = `${API_PAYPAY}/img/${email}`;
+//   const response = await Api({
+//     url,
+//     method: "get",
+//   });
+//   console.log(response);
+//   return response;
+// };
 

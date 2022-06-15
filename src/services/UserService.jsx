@@ -11,6 +11,5 @@ export const getUserbyEmail = async() => {
     method:"get",
     headers
   });
-  console.log("Response get user data : ", response);
   return response;
 };

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const BorderLogo = styled.div`
   width: 850px;
-  height: 100%;
   background-image: url(${(props) => props.image});
   background-position: top;
   background-size: cover;
