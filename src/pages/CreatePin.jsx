@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BorderKanan from "../components/Login/BorderKanan";
 import BorderKiri from "../components/Login/BorderKiri";
+import { deleteToken } from "../Util/TokenSession";
 
 const CreatePin = () => {
   return (

@@ -2,47 +2,48 @@ import React from "react";
 import RightBox from "../components/RightBox/RightBox";
 import HomeLayouts from "../Layouts/HomeLayouts/HomeLayouts";
 import { BorderText } from "../styles/TopUp/StyleTopUp";
-import "../styles/TopUp/CssTopUp.css"
+import "../styles/TopUp/CssTopUp.css";
+import logoBCA from "../Assets/BCA.png";
+import logoOVO from "../Assets/OVO.jpg";
+import logoDANA from "../Assets/DANA.png";
+import logoGOPAY from "../Assets/GOPAY.png";
+import { Link } from "react-router-dom";
 
 export const TopUp = () => {
   return (
     <HomeLayouts halaman="topup">
       <RightBox>
         <p>
-          <h3>How To Top Up</h3>
+          <h3>Top Up</h3>
         </p>
-        <BorderText>
-          <span className="text-angka">1 </span>
-          <span className="text-description">Go to the nearest ATM or you can use E-Banking</span>
-        </BorderText>
-        <BorderText>
-          <span className="text-angka">2 </span>
-          <span className="text-description">Type your security number on the ATM or E-Banking.</span>
-        </BorderText>
-        <BorderText>
-          <span className="text-angka">3 </span>
-          <span className="text-description">Type your security number on the ATM or E-Banking.</span>
-        </BorderText>
+        <Link to={"/topup/payment"} className="text-link">
+          <BorderText>
+            <span className="text-angka">1 </span>
+            <img className="image-logo" src={logoBCA} alt="foto" />
+            <span className="text-description">M-BCA</span>
+          </BorderText>
+        </Link>
+        <Link to={"/topup/payment"} className="text-link">
+          <BorderText>
+            <span className="text-angka">2 </span>
+            <img className="image-logo" src={logoOVO} alt="foto" />
+            <span className="text-description">OVO</span>
+          </BorderText>
+        </Link>
+        <Link to={"/topup/payment"} className="text-link">
+          <BorderText>
+            <span className="text-angka">3 </span>
+            <img className="image-logo" src={logoDANA} alt="foto" />
+            <span className="text-description">DANA</span>
+          </BorderText>
+        </Link>
+        <Link to={"/topup/payment"} className="text-link">
         <BorderText>
           <span className="text-angka">4 </span>
-          <span className="text-description">Type your security number on the ATM or E-Banking.</span>
+          <img className="image-logo" src={logoGOPAY} alt="foto" />
+          <span className="text-description">GOPAY</span>
         </BorderText>
-        <BorderText>
-          <span className="text-angka">5 </span>
-          <span className="text-description">Type your security number on the ATM or E-Banking.</span>
-        </BorderText>
-        <BorderText>
-          <span className="text-angka">6 </span>
-          <span className="text-description">Type your security number on the ATM or E-Banking.</span>
-        </BorderText>
-        <BorderText>
-          <span className="text-angka">7 </span>
-          <span className="text-description">Type your security number on the ATM or E-Banking.</span>
-        </BorderText>
-        <BorderText>
-          <span className="text-angka">8 </span>
-          <span className="text-description">Type your security number on the ATM or E-Banking.</span>
-        </BorderText>
+        </Link>
       </RightBox>
     </HomeLayouts>
   );

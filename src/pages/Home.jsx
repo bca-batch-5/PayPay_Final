@@ -10,6 +10,7 @@ import Chart from "../components/Chart/Chart";
 import arrowGreen from "../Assets/arrow-up-hijau.png";
 import arrowRed from "../Assets/arrow-up-merah.png";
 import { getUserbyEmail } from "../services/UserService";
+import { checkingTokenAvailable } from "../Util/TokenSession";
 
 const Home = () => {
   const [balance, setBalance] = useState();
@@ -17,14 +18,14 @@ const Home = () => {
   const [foto, setFoto] = useState("");
   useEffect(() => {
     getUserData();
+    console.log("hai");
   }, []);
 
   const getUserData = async () => {
     const response = await getUserbyEmail();
-    console.log(response);
     setBalance(response.data.data.saldo);
     if (response.data.data.noTelp != null) {
-      setNoTelp("+62" + response.data.data.noTelp);
+      setNoTelp(response.data.data.noTelp);
     }
   };
   return (

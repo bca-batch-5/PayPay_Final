@@ -25,9 +25,23 @@ import Card3 from "../components/Card/Card3";
 import People1 from "../Assets/Foto1.jpg";
 import People2 from "../Assets/Foto2.png";
 import People3 from "../Assets/Foto3.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { checkingTokenAvailable, deleteToken } from "../Util/TokenSession";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    session();
+    deleteToken();
+  }, []);
+
+  function session() {
+    const linkSession = checkingTokenAvailable();
+    if (linkSession != undefined) {
+      navigate(linkSession);
+    }
+  }
   return (
     <LandingBox>
       <Page>
@@ -44,17 +58,17 @@ const LandingPage = () => {
               </p>
               <div className="button-one">
                 <Link to={`/signin`}>
-                <ButtonComp
-                  color="white"
-                  backgroundColor="#6379F4"
-                  width="150px"
-                  bgHover="white"
-                  colorHover="#6379F4"
-                  border="2px solid white"
-                  borderHover="2px solid #6379F4"
-                >
-                  Try it Free
-                </ButtonComp>
+                  <ButtonComp
+                    color="white"
+                    backgroundColor="#6379F4"
+                    width="150px"
+                    bgHover="white"
+                    colorHover="#6379F4"
+                    border="2px solid white"
+                    borderHover="2px solid #6379F4"
+                  >
+                    Try it Free
+                  </ButtonComp>
                 </Link>
               </div>
             </div>
@@ -63,33 +77,37 @@ const LandingPage = () => {
         <PageOneRight>
           <div className="login-button">
             <Link to={`/signin`}>
-            <ButtonComp
-              color="white"
-              backgroundColor="#6379F4"
-              width="110px"
-              bgHover="white"
-              colorHover="#6379F4"
-              border="2px solid white"
-              borderHover="2px solid #6379F4"
-            >
-              Login
-            </ButtonComp>
+              <ButtonComp
+                color="white"
+                backgroundColor="#6379F4"
+                width="110px"
+                bgHover="white"
+                colorHover="#6379F4"
+                border="2px solid white"
+                borderHover="2px solid #6379F4"
+              >
+                Login
+              </ButtonComp>
             </Link>
             <Link to={`/signup`}>
-            <ButtonComp
-              color="#6379F4"
-              backgroundColor="white"
-              width="110px"
-              bgHover="#6379F4"
-              colorHover="white"
-              border="2px solid #6379F4"
-              borderHover=" 2px solid white"
-            >
-              Sign Up
-            </ButtonComp>
+              <ButtonComp
+                color="#6379F4"
+                backgroundColor="white"
+                width="110px"
+                bgHover="#6379F4"
+                colorHover="white"
+                border="2px solid #6379F4"
+                borderHover=" 2px solid white"
+              >
+                Sign Up
+              </ButtonComp>
             </Link>
           </div>
-          <img src={background} alt="background-atas" style={{width:'100%'}} />
+          <img
+            src={background}
+            alt="background-atas"
+            style={{ width: "100%" }}
+          />
           <img className="phone" src={phone} alt="" />
         </PageOneRight>
       </Page>
@@ -210,8 +228,10 @@ const LandingPage = () => {
           </p>
         </div>
         <div className="footer-bawah-box">
-          <span style={{color:"#EFEFEF"}}>2022 PayPay. All right reserved.</span>
-          <div className="footer-bawah-kanan" style={{color:"white"}}>
+          <span style={{ color: "#EFEFEF" }}>
+            2022 PayPay. All right reserved.
+          </span>
+          <div className="footer-bawah-kanan" style={{ color: "white" }}>
             <span>+62 5637 8882 9901</span>
             <span>contact@paypay.com</span>
           </div>

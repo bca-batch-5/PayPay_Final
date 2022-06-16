@@ -10,12 +10,13 @@ import {
   BorderGambar,
   BorderPilihan,
 } from "../styles/Profil/StyleProfil";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import defaultFoto from "../Assets/defaultPhoto.jpg";
 import { useState } from "react";
 import { getPhoto, ProfilService } from "../services/ProfilService";
 import { useEffect } from "react";
 import { getUserbyEmail } from "../services/UserService";
+import { ToastContainer, toast } from "react-toastify";
 
 export const Profile = () => {
   const [editClicked, setEditClicked] = useState();
@@ -24,12 +25,12 @@ export const Profile = () => {
   const [foto, setFoto] = useState("");
   const [nama, setNama] = useState();
   const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getPhotoProfil();
     getUserData();
-    console.log(foto);
-  },[]);
+  }, []);
 
   // const setFotoToLocal = () => {
   //   localStorage.setItem("photo", foto);
@@ -61,7 +62,7 @@ export const Profile = () => {
     } else {
       setFoto(url);
     }
-  },[]);
+  }, []);
 
   const getImageValue = (e) => {
     const [f] = e.target.files;
@@ -74,10 +75,26 @@ export const Profile = () => {
     let formData = new FormData();
     formData.append("file", fileValue);
     const res = await ProfilService(formData);
-    setFoto(res.data.data.url + '?' + Math.random());
-    localStorage.setItem("photo", res.data.data.url + '?' + Math.random());
+    setFoto(res.data.data.url + "?" + Math.random());
+    localStorage.setItem("photo", res.data.data.url + "?" + Math.random());
     console.log(foto);
   };
+
+  const logoutHandler = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("photo");
+    setTimeout(() => navigate("/"), 2000);
+    toast.error("Thank you! dont forget to come back", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
 
   return (
     <HomeLayouts photoProfile={foto}>
@@ -128,7 +145,7 @@ export const Profile = () => {
               </div>
             </BorderDalamPilihan>
           </BorderPilihan>
-          <BorderPilihan className="border-pilihan">
+          <BorderPilihan className="border-pilihan" onClick={logoutHandler}>
             <BorderDalamPilihan>
               <div>Logout</div>
               <div className="border-arrow">
@@ -138,6 +155,17 @@ export const Profile = () => {
           </BorderPilihan>
         </div>
       </RightBox>
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </HomeLayouts>
   );
 };
