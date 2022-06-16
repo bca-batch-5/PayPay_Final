@@ -23,6 +23,8 @@ import TransactionBox2 from "../../components/TransactionBox/TransactionBox2";
 import defaultPhoto from "../../Assets/defaultPhoto.jpg";
 import { getPhoto } from "../../services/ProfilService";
 import { getUserbyEmail } from "../../services/UserService";
+import { NotifService } from "../../services/TransactionService";
+import { useCallback } from "react";
 
 const HomeLayouts = (props) => {
   const { children, halaman, nomorTelfon, photoProfile } = props;
@@ -40,6 +42,11 @@ const HomeLayouts = (props) => {
   const [foto, setFoto] = useState("");
   const [nama, setNama] = useState();
   const [noTelp, setNoTelp] = useState("Nomor Telpon belum ada");
+  const [transaction, setTransaction]= useState([]);
+  // const [tipe, setTipe] = useState("");
+  // const [description,setDescription] = useState("");
+  // const [nominal,setNominal] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,6 +55,7 @@ const HomeLayouts = (props) => {
     getPhotoProfil();
     checkingTokenAvailable();
     console.log(photoProfile);
+    notification();
   }, []);
 
   const getPhotoProfil = async () => {
@@ -139,6 +147,12 @@ const HomeLayouts = (props) => {
       setLeftTextProfile("left-text-color");
     }
   }
+  
+  const notification = useCallback( async() =>{
+      const response = await NotifService();
+      console.log(response);
+      setTransaction(response.data.data)
+  },[navigate]);
 
   function checkingTokenAvailable() {
     const token = localStorage.getItem("user");
@@ -146,6 +160,7 @@ const HomeLayouts = (props) => {
       navigate("/");
     }
   }
+
 
   return (
     <div className="layouts-box" id={halaman}>
@@ -175,42 +190,19 @@ const HomeLayouts = (props) => {
       <div className="main-layouts">
         <NotifBox display={display}>
           <InNotifBox>
-            <p style={{ color: "#7A7886", fontSize: "15px" }}>Today</p>
-            <div style={{ marginTop: "10px", overflowY: "scroll" }}>
-              <TransactionBox2
-                tipe="kredit"
-                description="Transfered from Joshua Lee"
-                nominal="10.000"
+            <p style={{ color: "#7A7886", fontSize: "15px" }}>Last Transaction</p>
+            <div style={{ marginTop: "10px"}}>
+              {transaction.length > 0 ?(transaction.map((el) =>{
+                return (
+                  <TransactionBox2 key={el.id}
+                tipe={el.transactionType}
+                description={el.note}
+                nominal={el.nominal}
               />
-              <TransactionBox2
-                tipe="Debit"
-                description="Netflix subscription"
-                nominal="10.000"
-              />
-              <TransactionBox2
-                tipe="Debit"
-                description="Netflix subscription"
-                nominal="10.000"
-              />
-            </div>
-            <br />
-            <p style={{ color: "#7A7886", fontSize: "15px" }}>This Week</p>
-            <div style={{ marginTop: "10px", overflowY: "scroll" }}>
-              <TransactionBox2
-                tipe="kredit"
-                description="Transfered from Joshua Lee"
-                nominal="10.000"
-              />
-              <TransactionBox2
-                tipe="Debit"
-                description="Netflix subscription"
-                nominal="10.000"
-              />
-              <TransactionBox2
-                tipe="Debit"
-                description="Netflix subscription"
-                nominal="10.000"
-              />
+                )
+              })):(
+                <p>No Transaction Available</p>
+              )}
             </div>
           </InNotifBox>
         </NotifBox>

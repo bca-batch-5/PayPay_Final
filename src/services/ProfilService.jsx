@@ -29,6 +29,19 @@ export const getPhoto = async () => {
   return url;
 };
 
+export const getPhotoByEmail = async (email) => {
+  const emailget = email;
+  const url = `${API_PAYPAY}/img/${emailget}`;
+  const response = await Api({
+    url,
+    method: "get",
+  });
+  if(response.data.status === 500){
+    return null;
+  }
+  return url;
+};
+
 export const addPhoneNumber = async (data) => {
   const email = getEmail();
   const url = `${API_PAYPAY}/add-phone/${email}`;

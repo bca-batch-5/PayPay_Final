@@ -10,7 +10,7 @@ const TransactionBox2 = (props) => {
     function setArrow(){
         if(tipe === "Debit"){
             setArrowImg(arrowRed)
-        }else if(tipe === "kredit"){
+        }else if(tipe === "Kredit"){
             setArrowImg(arrowGreen)
         }
     }
@@ -26,7 +26,7 @@ const TransactionBox2 = (props) => {
         <img id={tipe} src={arrowImg} alt="arrow" />
       <div className="transaction-box-detail2">
         <p style={{ color:'#7A7A7A', fontSize: "18px" }}>{description}</p>
-        <NominalBox color='black'>{nominal}</NominalBox>
+        <NominalBox color='black'>Rp.{nominal}</NominalBox>
       </div>
         </div>
     </div>
