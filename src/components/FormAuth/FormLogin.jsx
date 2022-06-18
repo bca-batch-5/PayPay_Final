@@ -11,7 +11,7 @@ export const FormLogin = (props) => {
   const { formValid, pageValid } = props;
   const [emailValue, setEmailValue] = useState();
   const [passwordValue, setPasswordValue] = useState();
-  const [formDisplay, setFromDisplay] = useState();
+  const [formDisplay, setFormDisplay] = useState();
   const [iconClassEmail, setIconClassEmail] = useState();
   const [iconClassPass, setIconClassPass] = useState();
   const [inputValidEmail, setInputValidEmail] = useState();
@@ -27,12 +27,12 @@ export const FormLogin = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (formValid === false) {
-      setFromDisplay("form-valid");
+    if (pageValid === "signin") {
+      setFormDisplay("form-display");
+    } else {
+      setFormDisplay("form-no-display");
     }
-    if (pageValid === "create-pin" || pageValid === "forget-pass") {
-      setFromDisplay("form-valid");
-    }
+    
   });
 
   const login = async () => {

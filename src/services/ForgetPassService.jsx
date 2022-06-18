@@ -22,3 +22,12 @@ export const newPassService = async (data) => {
     return response
 }
 
+export const sendEmailForgetPass = async (data) => {
+    const url = `${API_PAYPAY}/send-mail`;
+    const response = await Api({
+        url,
+        method:"post",
+        data
+    });
+    return response
+}

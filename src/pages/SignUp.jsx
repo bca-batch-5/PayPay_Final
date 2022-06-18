@@ -9,6 +9,7 @@ const SignUp = () => {
       <BorderKanan
         linking=" Login"
         linkPage="/signin"
+        page="signup"
         judul="Start Accessing Banking Needs With All Devices and All Platforms
             With 30.000+ Users"
         subJudul="Transfering money is eassier than ever, you can access Pay Pay

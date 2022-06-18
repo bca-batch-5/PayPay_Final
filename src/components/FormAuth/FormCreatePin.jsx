@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import "../../styles/Form/ManipulationForm.css";
 import "../../styles/Form/CreatePin.css";
 import { Link } from "react-router-dom";
@@ -21,6 +21,8 @@ const FormCreatePin = (props) => {
   useEffect(() => {
     if (pageValid === "create-pin") {
       setFormDisplay("form-display");
+    } else {
+      setFormDisplay("form-no-display");
     }
   });
 

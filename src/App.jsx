@@ -19,6 +19,9 @@ import { ManagePhoneNumber } from "./pages/ManagePhoneNumber";
 import ChangePassword from "./pages/ChangePassword";
 import ChangePin from "./pages/ChangePin";
 import { PayTopUp } from "./pages/PayTopUp";
+import ChangeForgetPass from "./pages/ChangeForgetPass";
+import FormChangePassForget from "./components/FormAuth/FormChangePassForget";
+
 
 function App() {
   return (
@@ -35,6 +38,7 @@ function App() {
           <Route path="/signup" element={<SignUp/>}/>
           <Route path="/create-pin" element={<CreatePin/>}/>
           <Route path="/forget-password" element={<ForgetPass/>}/>
+          <Route path="/forget-password/change-password" element={<ChangeForgetPass/>}/>
           <Route path="/home/history" element={<History/>}/>
           <Route path="/topup" element={<TopUp/>}/>
           <Route path="/profil" element={<Profile/>}/>
