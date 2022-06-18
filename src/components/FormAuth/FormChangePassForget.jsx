@@ -1,4 +1,4 @@
-import React, {useEff ,useState } from "react";
+import React, { useEff, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { newPassService } from "../../services/ForgetPassService";
 import { ToastContainer, toast } from "react-toastify";
@@ -54,7 +54,7 @@ const FormChangePassForget = (props) => {
     };
     const res = await newPassService(data);
     if (res.data.status === 200) {
-      setTimeout(() => navigate("/signin"), 2000);
+      setTimeout(() => window.close(), 2000);
       toast.success("Password Success to Change", {
         position: "top-center",
         autoClose: 1000,
@@ -131,7 +131,7 @@ const FormChangePassForget = (props) => {
   }
   return (
     <div className={formDisplay}>
-      <form >
+      <form>
         <BorderInput className={inputValidPass}>
           <i id="lock" className={`fa fa-lock ${iconClassPass}`}></i>
           <input
@@ -180,6 +180,17 @@ const FormChangePassForget = (props) => {
           </button>
         </Link>
       </form>
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
     </div>
   );
 };
