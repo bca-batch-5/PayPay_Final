@@ -40,3 +40,6 @@
 .form-no-display{
     display: none;
 }
+.form-warna{
+    background-color: red;
+}

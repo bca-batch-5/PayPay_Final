@@ -11,7 +11,7 @@ import "../../styles/Form/FormLogin.css";
 import { Link } from "react-router-dom";
 import SuccessImage from "../../Assets/success.png";
 import FormForgetPass from "../FormAuth/FormForgetPass";
-
+import FormChangePassForget from "../FormAuth/FormChangePassForget";
 
 const BorderKanan = (props) => {
   const { linking, linkPage, judul, subJudul, page } = props;
@@ -23,19 +23,10 @@ const BorderKanan = (props) => {
   const [successDisplay, setSuccessDisplay] = useState("logo-sucess-no-valid");
 
   useEffect(() => {
-    // page berada di signUp
-    if (linkPage === "/signin") {
-      setFormValidation(false);
-    } else if (linkPage === "/signup") {
-      // page berada di login
-      setFormValidation(true);
-    }
     setCurrentPage(page);
     // menghilangkan pilihan untuk login atau signup
-    if (currentPage === "create-pin" || currentPage === "forget-pass") {
-      setLinkDisplay("form-valid");
-    }
-  },[]);
+   console.log("current page: " + currentPage);
+  });
 
   function successHandler(display, title, subTitle){
     setSuccessDisplay(display);
@@ -56,11 +47,12 @@ const BorderKanan = (props) => {
         </BorderJudul>
         <div>
           <div className="form-box">
-            <FormLogin formValid={formValidation} pageValid={currentPage} />
-            <FormSignUp formValid={formValidation} pageValid={currentPage} />
+            <FormLogin  pageValid={currentPage} />
+            <FormSignUp  pageValid={currentPage} />
             <FormCreatePin pageValid={currentPage} logoSuccess={successHandler}></FormCreatePin>
             <FormForgetPass pageValid={currentPage}></FormForgetPass>
-            <br />
+            <FormChangePassForget pageValid={currentPage}></FormChangePassForget>
+            <br/>
             <br />
             <p className={`form-subtext ${linkDisplay}`}>
               Don't have an account? Lets

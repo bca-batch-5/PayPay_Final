@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const FormSignUp = (props) => {
   const { formValid, pageValid } = props;
-  const [formDisplay, setFromDisplay] = useState();
+  const [formDisplay, setFormDisplay] = useState();
   const [iconClassEmail, setIconClassEmail] = useState();
   const [iconClassPass, setIconClassPass] = useState();
   const [inputValidEmail, setInputValidEmail] = useState();
@@ -31,11 +31,10 @@ const FormSignUp = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (formValid === true) {
-      setFromDisplay("form-valid");
-    }
-    if (pageValid === "create-pin" || pageValid === "forget-pass") {
-      setFromDisplay("form-valid");
+    if (pageValid === "signup") {
+      setFormDisplay("form-display");
+    } else {
+      setFormDisplay("form-no-display");
     }
   });
 

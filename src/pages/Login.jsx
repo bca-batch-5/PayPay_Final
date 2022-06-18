@@ -23,6 +23,7 @@ const LandingPage = () => {
       <BorderKanan
         linking=" SignUp"
         linkPage="/signup"
+        page="signin"
         judul="Start Accessing Banking Needs With All Devices and All Platforms
             With 30.000+ Users"
         subJudul="Transfering money is eassier than ever, you can access Pay Pay
