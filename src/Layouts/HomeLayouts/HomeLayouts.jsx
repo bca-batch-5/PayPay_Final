@@ -25,6 +25,13 @@ import { getPhoto } from "../../services/ProfilService";
 import { getUserbyEmail } from "../../services/UserService";
 import { NotifService } from "../../services/TransactionService";
 import { useCallback } from "react";
+import { ToastContainer, toast } from "react-toastify";
+
+import {
+  checkingTokenNotAvailable,
+  deleteToken,
+  tokenExpired,
+} from "../../Util/TokenSession";
 
 const HomeLayouts = (props) => {
   const { children, halaman, nomorTelfon, photoProfile } = props;
@@ -41,12 +48,12 @@ const HomeLayouts = (props) => {
   const [display, setDisplay] = useState("none");
   const [foto, setFoto] = useState("");
   const [nama, setNama] = useState();
-  const [noTelp, setNoTelp] = useState("Nomor Telpon belum ada");
-  const [transaction, setTransaction]= useState([]);
+  const [transaction, setTransaction] = useState([]);
   // const [tipe, setTipe] = useState("");
   // const [description,setDescription] = useState("");
   // const [nominal,setNominal] = useState("");
 
+  const [noTelp, setNoTelp] = useState("Phone Number is not exist");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,7 +63,38 @@ const HomeLayouts = (props) => {
     checkingTokenAvailable();
     console.log(photoProfile);
     notification();
+    sessionNoToken();
+    sessionExpired();
   }, []);
+
+  const sessionExpired = () => {
+    const token = localStorage.getItem("user");
+    let expired;
+    if (token != null) {
+      expired = tokenExpired(token);
+    }
+    if (expired != undefined) {
+      setTimeout(() => navigate(expired), 3000);
+      toast.error("Session Timed Out!, Please Login Again", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+  function sessionNoToken() {
+    const token = localStorage.getItem("user");
+    let limit;
+    limit = checkingTokenNotAvailable(token);
+    if (limit != undefined) {
+      console.log("Token: ", token + "- " + "limit");
+      navigate(limit);
+    }
+  }
 
   const getPhotoProfil = async () => {
     const url = await getPhoto();
@@ -75,15 +113,25 @@ const HomeLayouts = (props) => {
     }
   }
   const logoutHandler = () => {
-    localStorage.removeItem("user");
+    deleteToken();
     localStorage.removeItem("photo");
+    setTimeout(() => navigate("/"), 3000);
+    toast.error("Thank you! dont forget to come back", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   const getUserData = async () => {
     const response = await getUserbyEmail();
     setNama(response.data.data.nama);
     if (response.data.data.noTelp != null) {
-      setNoTelp("+62" + response.data.data.noTelp);
+      setNoTelp(response.data.data.noTelp);
     }
   };
 
@@ -147,20 +195,19 @@ const HomeLayouts = (props) => {
       setLeftTextProfile("left-text-color");
     }
   }
-  
-  const notification = useCallback( async() =>{
-      const response = await NotifService();
-      console.log(response);
-      setTransaction(response.data.data)
-  },[navigate]);
+
+  const notification = useCallback(async () => {
+    const response = await NotifService();
+    console.log(response);
+    setTransaction(response.data.data);
+  }, [navigate]);
 
   function checkingTokenAvailable() {
     const token = localStorage.getItem("user");
-    if(token == null){
+    if (token == null) {
       navigate("/");
     }
   }
-
 
   return (
     <div className="layouts-box" id={halaman}>
@@ -190,17 +237,22 @@ const HomeLayouts = (props) => {
       <div className="main-layouts">
         <NotifBox display={display}>
           <InNotifBox>
-            <p style={{ color: "#7A7886", fontSize: "15px" }}>Last Transaction</p>
-            <div style={{ marginTop: "10px"}}>
-              {transaction.length > 0 ?(transaction.map((el) =>{
-                return (
-                  <TransactionBox2 key={el.id}
-                tipe={el.transactionType}
-                description={el.note}
-                nominal={el.nominal}
-              />
-                )
-              })):(
+            <p style={{ color: "#7A7886", fontSize: "15px" }}>
+              Last Transaction
+            </p>
+            <div style={{ marginTop: "10px" }}>
+              {transaction.length > 0 ? (
+                transaction.map((el) => {
+                  return (
+                    <TransactionBox2
+                      key={el.id}
+                      tipe={el.transactionType}
+                      description={el.note}
+                      nominal={el.nominal}
+                    />
+                  );
+                })
+              ) : (
                 <p>No Transaction Available</p>
               )}
             </div>
@@ -262,15 +314,14 @@ const HomeLayouts = (props) => {
               <br />
               <div className="left-box-text">
                 <img src={logout} alt="" />
-                <Link
-                  to={"/"}
+                <p
                   className={leftTextLogout}
                   onMouseEnter={logoutEnter}
                   onMouseLeave={logoutLeave}
                   onClick={logoutHandler}
                 >
-                  <p>Log out</p>
-                </Link>
+                  Log out
+                </p>
               </div>
             </LeftBoxTextRange>
           </InLeftBox>
@@ -288,6 +339,17 @@ const HomeLayouts = (props) => {
           </div>
         </div>
       </footer>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
     </div>
   );
 };

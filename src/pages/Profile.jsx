@@ -10,12 +10,13 @@ import {
   BorderGambar,
   BorderPilihan,
 } from "../styles/Profil/StyleProfil";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import defaultFoto from "../Assets/defaultPhoto.jpg";
 import { useState } from "react";
 import { getPhoto, ProfilService } from "../services/ProfilService";
 import { useEffect } from "react";
 import { getUserbyEmail } from "../services/UserService";
+import { ToastContainer, toast } from "react-toastify";
 
 export const Profile = () => {
   const [editClicked, setEditClicked] = useState();
@@ -23,13 +24,13 @@ export const Profile = () => {
   const [fileValue, setFileValue] = useState();
   const [foto, setFoto] = useState("");
   const [nama, setNama] = useState();
-  const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
+  const [noTelp, setNoTelp] = useState("Phone Number is not exist");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getPhotoProfil();
     getUserData();
-    console.log(foto);
-  },[]);
+  }, []);
 
   // const setFotoToLocal = () => {
   //   localStorage.setItem("photo", foto);
@@ -61,7 +62,7 @@ export const Profile = () => {
     } else {
       setFoto(url);
     }
-  },[]);
+  }, []);
 
   const getImageValue = (e) => {
     const [f] = e.target.files;
@@ -74,9 +75,24 @@ export const Profile = () => {
     let formData = new FormData();
     formData.append("file", fileValue);
     const res = await ProfilService(formData);
-    setFoto(res.data.data.url + '?' + Math.random());
-    localStorage.setItem("photo", res.data.data.url + '?' + Math.random());
+    setFoto(res.data.data.url + "?" + Math.random());
+    localStorage.setItem("photo", res.data.data.url + "?" + Math.random());
     console.log(foto);
+  };
+
+  const logoutHandler = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("photo");
+    setTimeout(() => navigate("/"), 2000);
+    toast.error("Thank you! dont forget to come back", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (
@@ -113,26 +129,26 @@ export const Profile = () => {
             </BorderPilihan>
           </Link>
           <Link to={"/profile/changepassword"} className="text-link">
-          <BorderPilihan className="border-pilihan">
-            <BorderDalamPilihan>
-              <div>Change Password</div>
-              <div className="border-arrow">
-                <img src={arrow} alt="Arrow Left" />
-              </div>
-            </BorderDalamPilihan>
-          </BorderPilihan>
+            <BorderPilihan className="border-pilihan">
+              <BorderDalamPilihan>
+                <div>Change Password</div>
+                <div className="border-arrow">
+                  <img src={arrow} alt="Arrow Left" />
+                </div>
+              </BorderDalamPilihan>
+            </BorderPilihan>
           </Link>
           <Link to={"/profile/changepin"} className="text-link">
-          <BorderPilihan className="border-pilihan">
-            <BorderDalamPilihan>
-              <div>Change Pin</div>
-              <div className="border-arrow">
-                <img src={arrow} alt="Arrow Left" />
-              </div>
-            </BorderDalamPilihan>
-          </BorderPilihan>
+            <BorderPilihan className="border-pilihan">
+              <BorderDalamPilihan>
+                <div>Change Pin</div>
+                <div className="border-arrow">
+                  <img src={arrow} alt="Arrow Left" />
+                </div>
+              </BorderDalamPilihan>
+            </BorderPilihan>
           </Link>
-          <BorderPilihan className="border-pilihan">
+          <BorderPilihan className="border-pilihan" onClick={logoutHandler}>
             <BorderDalamPilihan>
               <div>Logout</div>
               <div className="border-arrow">
@@ -142,6 +158,17 @@ export const Profile = () => {
           </BorderPilihan>
         </div>
       </RightBox>
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </HomeLayouts>
   );
 };

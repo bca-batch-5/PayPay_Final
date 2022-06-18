@@ -44,7 +44,7 @@ export const FormLogin = (props) => {
       const res = await AuthService(data);
       if (res.data.status === 201) {
         setTimeout(() => navigate("/home"), 2000);
-        toast.success("Login Berhasil", {
+        toast.success("Login Success", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: false,

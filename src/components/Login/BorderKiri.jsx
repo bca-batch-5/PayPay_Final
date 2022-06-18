@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BorderLogo,
   BorderTitle,
@@ -10,8 +10,21 @@ import phoneOne from "../../Assets/png-phone.png";
 import phoneTwo from "../../Assets/png-phone2.png";
 import "../../styles/Login/CssLogin.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const BorderKiri = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    checkingTokenAvailable();
+  }, []);
+
+  function checkingTokenAvailable() {
+    const token = localStorage.getItem("user");
+    if (token != null) {
+      navigate("/home");
+    }
+    console.log(token);
+  }
   return (
     <BorderLogo image={MaskGroup}>
       <Link to="/" className="border-title">

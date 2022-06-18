@@ -18,6 +18,7 @@ import { AddPhoneNumber} from "./pages/AddPhoneNumber";
 import { ManagePhoneNumber } from "./pages/ManagePhoneNumber";
 import ChangePassword from "./pages/ChangePassword";
 import ChangePin from "./pages/ChangePin";
+import { PayTopUp } from "./pages/PayTopUp";
 
 function App() {
   return (
@@ -42,7 +43,7 @@ function App() {
           <Route path="/manage-phone" element={<ManagePhoneNumber/>}/>
           <Route path="/profile/changepassword" element={<ChangePassword/>}/>
           <Route path="/profile/changepin" element={<ChangePin/>}/>
-
+          <Route path="/topup/payment" element={<PayTopUp/>}/>
         </Routes>
     </BrowserRouter>
   );

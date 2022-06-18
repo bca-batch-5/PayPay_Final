@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import BorderKanan from "../components/Login/BorderKanan";
 import BorderKiri from "../components/Login/BorderKiri";
 import "../styles/Login/CssLogin.css";
+import { checkingTokenAvailable } from "../Util/TokenSession";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    session();
+  }, []);
+
+  function session() {
+    const linkSession = checkingTokenAvailable();
+    if (linkSession != undefined) {
+      navigate(linkSession);
+    }
+  }
   return (
     <div className="border-auth">
       <BorderKiri></BorderKiri>

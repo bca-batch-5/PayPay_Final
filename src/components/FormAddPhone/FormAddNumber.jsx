@@ -22,11 +22,13 @@ export const FormAddNumber = () => {
     const data = {
       noTelp: nomorTelpon,
     };
-    const res = await addPhoneNumber(data);
-    if(res.data.status === 201){
-      navigate("/manage-phone");
+    if (nomorTelpon != null) {
+      const res = await addPhoneNumber(data);
+      if (res.data.status === 201) {
+        navigate("/manage-phone");
+      }
+      console.log("response dari form: ", res);
     }
-    console.log("response dari form: ", res);
   };
 
   const addPhoneSubmit = (e) => {
