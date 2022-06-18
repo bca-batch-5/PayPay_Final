@@ -8,22 +8,72 @@
   color: #6379f4;
 }
 
-.text-description{
-    font-family: 'Nunito Sans';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 27px;
-    display: flex;
-    align-items: center;
-    color: #7A7886;
-    margin-left: 20px;
+.text-description {
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  color: #7a7886;
+  margin-left: 20px;
 }
-.text-link{
+.text-link {
   text-decoration: none;
 }
-.image-logo{
-  width: 80px;
+.image-logo {
+  width: 90px;
   height: 70px;
   border-radius: 10%;
+}
+
+.input-nominal-topup {
+  text-align: center;
+  border: none;
+  width: 100%;
+  outline: none;
+  font-size: 40px;
+  margin-bottom: 35px;
+  color: blue;
+}
+.form-nominal-topup{
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.border-menu-button-topup{
+    width: 433px;
+    height: 64px;
+    background: #e5e8ed;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Nunito Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    color: #88888f;
+    box-shadow: 0px 6px 75px rgb(100 87 87 / 5%);
+    transition: all 1s ease;
+}
+.border-menu-button-topup:hover{
+  cursor: not-allowed;
+}
+.border-menu-button-topup-exist{
+  background-color:#6379F4;
+  color: white;
+}
+.border-menu-button-topup-exist:hover{
+  cursor: pointer;
+}
+.text-failed-show{
+  color: red;
+  display: block;
+}
+.text-failed-hidden{
+  display: none;
 }

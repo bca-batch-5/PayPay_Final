@@ -23,6 +23,7 @@ export function tokenExpired(token) {
   const decodeJWT = jwt_decode(user.accessToken);
   if (decodeJWT.exp * 1000 < Date.now()) {
     console.log("token habis");
+    deleteToken();
     link = "/";
     return link;
   }

@@ -33,7 +33,6 @@ const LandingPage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     session();
-    deleteToken();
   }, []);
 
   function session() {
@@ -41,6 +40,9 @@ const LandingPage = () => {
     if (linkSession != undefined) {
       navigate(linkSession);
     }
+    // if (linkSession == null) {
+    //   deleteToken();
+    // }
   }
   return (
     <LandingBox>

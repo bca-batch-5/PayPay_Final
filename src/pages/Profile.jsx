@@ -24,7 +24,7 @@ export const Profile = () => {
   const [fileValue, setFileValue] = useState();
   const [foto, setFoto] = useState("");
   const [nama, setNama] = useState();
-  const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
+  const [noTelp, setNoTelp] = useState("Phone Number is not exist");
   const navigate = useNavigate();
 
   useEffect(() => {

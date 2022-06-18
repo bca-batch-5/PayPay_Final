@@ -27,6 +27,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 import {
   checkingTokenNotAvailable,
+  deleteToken,
   tokenExpired,
 } from "../../Util/TokenSession";
 
@@ -45,7 +46,7 @@ const HomeLayouts = (props) => {
   const [display, setDisplay] = useState("none");
   const [foto, setFoto] = useState("");
   const [nama, setNama] = useState();
-  const [noTelp, setNoTelp] = useState("Nomor Telpon belum ada");
+  const [noTelp, setNoTelp] = useState("Phone Number is not exist");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,7 +65,7 @@ const HomeLayouts = (props) => {
     }
     if (expired != undefined) {
       setTimeout(() => navigate(expired), 3000);
-      toast.error("Session Habis! Silahkan Login Kembali", {
+      toast.error("Session Timed Out!, Please Login Again", {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: false,
@@ -102,6 +103,7 @@ const HomeLayouts = (props) => {
     }
   }
   const logoutHandler = () => {
+    deleteToken();
     localStorage.removeItem("photo");
     setTimeout(() => navigate("/"), 3000);
     toast.error("Thank you! dont forget to come back", {

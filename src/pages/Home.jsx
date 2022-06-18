@@ -10,11 +10,11 @@ import Chart from "../components/Chart/Chart";
 import arrowGreen from "../Assets/arrow-up-hijau.png";
 import arrowRed from "../Assets/arrow-up-merah.png";
 import { getUserbyEmail } from "../services/UserService";
-import { checkingTokenAvailable } from "../Util/TokenSession";
+import NumberFormat from "react-number-format";
 
 const Home = () => {
   const [balance, setBalance] = useState();
-  const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
+  const [noTelp, setNoTelp] = useState("Phone Number is not exist");
   const [foto, setFoto] = useState("");
   useEffect(() => {
     getUserData();
@@ -37,8 +37,17 @@ const Home = () => {
               <p style={{ color: "#E0E0E0", fontSize: "25px" }}>Balance</p>
               <br />
               <p style={{ color: "White", fontSize: "40px" }}>
-                <span>Rp.</span>
-                {balance}
+                <NumberFormat
+                  thousandsGroupStyle="thousand"
+                  value={balance}
+                  prefix="Rp "
+                  decimalSeparator=","
+                  displayType="text"
+                  type="text"
+                  thousandSeparator="."
+                  allowNegative={true}
+                />
+                
               </p>
               <br />
               <p style={{ color: "#E0E0E0", fontSize: "15px" }}>{noTelp}</p>

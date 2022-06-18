@@ -1,12 +1,12 @@
 .layouts-box{
     background-color: #FAFCFF;
-    height: 100%;
+    /* height: 100%; */
 }
 
 .main-layouts{
     display: flex;
     padding: 40px 130px 133px 130px;
-    height: 100%;
+    /* height: 100%; */
 }
 
 /* left box style */

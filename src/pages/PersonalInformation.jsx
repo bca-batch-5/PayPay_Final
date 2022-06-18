@@ -8,7 +8,7 @@ import { BorderInfo } from "../styles/PersonalInformation/StylePersonalInfo";
 
 export const PersonalInformation = () => {
   const [nama, setNama] = useState();
-  const [noTelp, setNoTelp] = useState("nomor Telpon belum ada");
+  const [noTelp, setNoTelp] = useState("Phone Number is not exist");
   const [email, setEmail] = useState();
   useEffect(() => {
     getUserData();
