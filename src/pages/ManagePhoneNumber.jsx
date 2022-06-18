@@ -8,7 +8,7 @@ import "../styles/ManagePhoneNumber/CssManagePhone.css";
 import { BorderInfo } from "../styles/PersonalInformation/StylePersonalInfo";
 
 export const ManagePhoneNumber = () => {
-  const [phoneNumber, setPhoneNumber] = useState("Nomor Telpon belum ada");
+  const [phoneNumber, setPhoneNumber] = useState("Phone Number is not exist");
 
   useEffect(() => {
     getUserData();
@@ -17,7 +17,7 @@ export const ManagePhoneNumber = () => {
   const deleteHandler= async(e) => {
     e.preventDefault();
    const res = await deletePhoneNumber();
-   setPhoneNumber("Nomor Telpon belum ada");
+   setPhoneNumber("Phone Number is not exist");
    console.log("dari manage phone", res);
   }
 

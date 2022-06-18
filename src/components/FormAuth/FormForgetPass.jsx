@@ -71,7 +71,7 @@ const FormForgetPass = (props) => {
     const res = await newPassService(data);
     if (res.data.status === 200) {
       setTimeout(() =>  navigate("/signin"), 2000);
-      toast.success("Password berhasil di ganti", {
+      toast.success("Password Success to Change", {
         position: "top-center",
         autoClose: 1000,
         hideProgressBar: false,
