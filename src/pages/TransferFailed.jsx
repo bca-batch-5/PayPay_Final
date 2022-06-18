@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card6 from "../components/Card/Card6";
 import Card5 from "../components/Card/Card5";
 import RightBox from "../components/RightBox/RightBox";
@@ -9,7 +9,40 @@ import '../styles/Transfer/styleTransferConfirmation.css'
 import ButtonComp from "../components/Button/ButtonComp";
 import failedImg from '../Assets/failed.png'
 import '../styles/Transfer/styleTransferSucces.css'
+import { getUserbyEmail, getUserReceiverbyEmail } from '../services/UserService';
+import NumberFormat from 'react-number-format';
 const TransferFailed = () => {
+  const [date, setDate] = useState();
+  const [nama, setNama] = useState();
+  const [email, setEmail] = useState();
+  const [lastBalance,setLastBalance] = useState();
+
+
+  function getCurrentDate() {
+    var today = new Date();
+     var dateNow = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear();
+     console.log(dateNow);
+    setDate(dateNow);
+  }
+
+  useEffect(() => {
+    getUser();
+    getCurrentDate();
+    User();
+  }, []);
+
+  const getUser = async () => {
+    const email = localStorage.getItem("emailReceiver");
+    const res = await getUserReceiverbyEmail(email);
+    console.log(res);
+    setNama(res.data.data.nama);
+    setEmail(res.data.data.user.email);
+  };
+
+  const User = async () =>{
+    const res = await getUserbyEmail();
+    setLastBalance(res.data.data.saldo);
+  }
   return (
     <HomeLayouts halaman="transfer">
       <RightBox>
@@ -22,16 +55,36 @@ const TransferFailed = () => {
           </div>
           <br />
         <h4>Details</h4>
-        <Card6 cardTitle="Amount" cardSubtitle="Rp.100.000" />
-        <Card6 cardTitle="Balance Left" cardSubtitle="Rp.20.000" />
-        <Card6 cardTitle="Date & Times" cardSubtitle="11 Mei 2022" />
-        <Card6 cardTitle="Notes" cardSubtitle="Beli Kaos Kaki" />
+        <Card6 cardTitle="Amount" cardSubtitle={<NumberFormat
+            thousandsGroupStyle="thousand"
+            value={localStorage.getItem("nominalTransfer")}
+            prefix="Rp "
+            decimalSeparator=","
+            displayType="text"
+            type="text"
+            thousandSeparator="."
+            allowNegative={true}
+          />} />
+        <Card6 cardTitle="Balance Left" cardSubtitle={
+        <NumberFormat
+            thousandsGroupStyle="thousand"
+            value={lastBalance}
+            prefix="Rp "
+            decimalSeparator=","
+            displayType="text"
+            type="text"
+            thousandSeparator="."
+            allowNegative={true}
+          />
+          }/>
+        <Card6 cardTitle="Date & Times" cardSubtitle={date}/>
+        <Card6 cardTitle="Notes" cardSubtitle={localStorage.getItem("notes")} />
         <br />
         <h4>Transfer To</h4>
         <Card5
           image={people1}
-          cardTitle="Samuel Suhi"
-          cardSubtitle="08990821922"
+          cardTitle={nama}
+          cardSubtitle={email}
         />
         <br />
         <div className="button-box">

@@ -10,14 +10,19 @@ import Chart from "../components/Chart/Chart";
 import arrowGreen from "../Assets/arrow-up-hijau.png";
 import arrowRed from "../Assets/arrow-up-merah.png";
 import { getUserbyEmail } from "../services/UserService";
+import { HistoryHomeService } from "../services/TransactionService";
+import { getEmail } from "../API/Api";
+import { getPhotoByEmail } from "../services/ProfilService";
 import NumberFormat from "react-number-format";
 
 const Home = () => {
   const [balance, setBalance] = useState();
   const [noTelp, setNoTelp] = useState("Phone Number is not exist");
   const [foto, setFoto] = useState("");
+  const [history, setHistory] = useState([]);
   useEffect(() => {
     getUserData();
+    getHistory();
     console.log("hai");
   }, []);
 
@@ -28,6 +33,13 @@ const Home = () => {
       setNoTelp(response.data.data.noTelp);
     }
   };
+
+  const getHistory = async () => {
+    const response = await HistoryHomeService();
+    console.log(response);
+    setHistory(response.data.data);
+  };
+
   return (
     <HomeLayouts halaman="home" photoProfile={foto}>
       <div className="box-kanan-all">
@@ -132,36 +144,31 @@ const Home = () => {
                   <p>See all</p>
                 </Link>
               </div>
-              <TransactionBox1
-                imgSrc={people1}
-                nama="Samuel Suhi"
-                tipe="Kredit"
-                nominal="+10.000"
-              />
-              <TransactionBox1
-                imgSrc={netflix}
-                nama="Netflix"
-                tipe="Debit"
-                nominal="+10.000"
-              />
-              <TransactionBox1
-                imgSrc={netflix}
-                nama="Netflix"
-                tipe="Debit"
-                nominal="+10.000"
-              />
-              <TransactionBox1
-                imgSrc={netflix}
-                nama="Netflix"
-                tipe="Debit"
-                nominal="+10.000"
-              />
-              <TransactionBox1
-                imgSrc={netflix}
-                nama="Netflix"
-                tipe="Debit"
-                nominal="+10.000"
-              />
+              {history.length > 0 ? (
+                history.map((el) => {
+                  if(el.from == null){
+                    return (
+                      <TransactionBox1 key={el.id}
+                        imgSrc={people1}
+                        nama={el.to.userName}
+                        tipe={el.transactionType}
+                        nominal={el.nominal}
+                      />
+                    );
+                  }else if(el.to == null){
+                    return(
+                      <TransactionBox1 key={el.id}
+                          imgSrc={people1}
+                          nama={el.from.userName}
+                          tipe={el.transactionType}
+                          nominal={el.nominal}
+                        />
+                    )
+                  }
+                })
+              ) : (
+                <p>no transaction available</p>
+              )}
             </div>
           </div>
         </div>

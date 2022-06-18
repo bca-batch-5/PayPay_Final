@@ -5,12 +5,14 @@ const TransactionBox1 = (props) => {
 const {imgSrc,nama,tipe,nominal} = props;
 
 const [warna, setWarna]= useState();
-
+const [plusmin, setPlusmin]= useState();
 function tipeInput(){
     if(tipe === "Debit"){
         setWarna('red')
+        setPlusmin("-")
     }else if(tipe === "Kredit"){
         setWarna('green')
+        setPlusmin('+')
     }
 }
 
@@ -27,7 +29,7 @@ useEffect(()=> {
           <p style={{ fontSize: "12px", color: "#7A7886" } }>{tipe}</p>
         </div>
       </div>
-      <NominalBox color={warna}>{nominal}</NominalBox>
+      <NominalBox color={warna}>{plusmin}{nominal}</NominalBox>
     </div>
   );
 };

@@ -95,7 +95,6 @@ export const Profile = () => {
     });
   };
 
-
   return (
     <HomeLayouts photoProfile={foto}>
       <RightBox>
@@ -129,22 +128,26 @@ export const Profile = () => {
               </BorderDalamPilihan>
             </BorderPilihan>
           </Link>
-          <BorderPilihan className="border-pilihan">
-            <BorderDalamPilihan>
-              <div>Change Password</div>
-              <div className="border-arrow">
-                <img src={arrow} alt="Arrow Left" />
-              </div>
-            </BorderDalamPilihan>
-          </BorderPilihan>
-          <BorderPilihan className="border-pilihan">
-            <BorderDalamPilihan>
-              <div>Change Pin</div>
-              <div className="border-arrow">
-                <img src={arrow} alt="Arrow Left" />
-              </div>
-            </BorderDalamPilihan>
-          </BorderPilihan>
+          <Link to={"/profile/changepassword"} className="text-link">
+            <BorderPilihan className="border-pilihan">
+              <BorderDalamPilihan>
+                <div>Change Password</div>
+                <div className="border-arrow">
+                  <img src={arrow} alt="Arrow Left" />
+                </div>
+              </BorderDalamPilihan>
+            </BorderPilihan>
+          </Link>
+          <Link to={"/profile/changepin"} className="text-link">
+            <BorderPilihan className="border-pilihan">
+              <BorderDalamPilihan>
+                <div>Change Pin</div>
+                <div className="border-arrow">
+                  <img src={arrow} alt="Arrow Left" />
+                </div>
+              </BorderDalamPilihan>
+            </BorderPilihan>
+          </Link>
           <BorderPilihan className="border-pilihan" onClick={logoutHandler}>
             <BorderDalamPilihan>
               <div>Logout</div>

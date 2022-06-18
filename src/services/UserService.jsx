@@ -13,3 +13,15 @@ export const getUserbyEmail = async() => {
   });
   return response;
 };
+
+export const getUserReceiverbyEmail = async(email) => {
+  const getEmail = email;
+  const url = `${API_PAYPAY}/${getEmail}`;
+  const headers = getHeaders();
+  const response = await Api({
+    url,
+    method:"get",
+    headers
+  });
+  return response;
+};
