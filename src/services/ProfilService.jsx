@@ -68,3 +68,17 @@ export const deletePhoneNumber = async () => {
   console.log(response);
   return response;
 };
+
+export const changePassword = async (data) => {
+  const email = getEmail();
+  const url = `${API_PAYPAY}/change-pass/${email}`;
+  const headers = getHeaders;
+  const response = await Api(
+    {
+      url,
+      data,
+      method: "put",
+      headers
+    }
+  )
+}

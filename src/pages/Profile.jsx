@@ -112,6 +112,7 @@ export const Profile = () => {
               </BorderDalamPilihan>
             </BorderPilihan>
           </Link>
+          <Link to={"/profile/changepassword"} className="text-link">
           <BorderPilihan className="border-pilihan">
             <BorderDalamPilihan>
               <div>Change Password</div>
@@ -120,6 +121,8 @@ export const Profile = () => {
               </div>
             </BorderDalamPilihan>
           </BorderPilihan>
+          </Link>
+          <Link to={"/profile/changepin"} className="text-link">
           <BorderPilihan className="border-pilihan">
             <BorderDalamPilihan>
               <div>Change Pin</div>
@@ -128,6 +131,7 @@ export const Profile = () => {
               </div>
             </BorderDalamPilihan>
           </BorderPilihan>
+          </Link>
           <BorderPilihan className="border-pilihan">
             <BorderDalamPilihan>
               <div>Logout</div>
