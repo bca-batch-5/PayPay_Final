@@ -1,7 +1,8 @@
 import React from "react";
 import "../../styles/Pin/stylePin.css";
 
-const Pin = () => {
+const Pin = (props) => {
+  const {onInput} = props;
   function moveEvent(e) {
     if (e.target.value.length == 1) {
       const form = e.target.form;
@@ -26,6 +27,7 @@ const Pin = () => {
         id="first"
         onKeyPress={pressHandler}
         onKeyUp={moveEvent}
+        onInput={onInput}
       />
       <input
         className="form-pin-baru"
@@ -34,6 +36,7 @@ const Pin = () => {
         id="sec"
         onKeyPress={pressHandler}
         onKeyUp={moveEvent}
+        onInput={onInput}
       />
       <input
         className="form-pin-baru"
@@ -42,6 +45,7 @@ const Pin = () => {
         id="third"
         onKeyPress={pressHandler}
         onKeyUp={moveEvent}
+        onInput={onInput}
       />
       <input
         className="form-pin-baru"
@@ -50,6 +54,7 @@ const Pin = () => {
         id="fourth"
         onKeyPress={pressHandler}
         onKeyUp={moveEvent}
+        onInput={onInput}
       />
       <input
         className="form-pin-baru"
@@ -58,6 +63,7 @@ const Pin = () => {
         id="fifth"
         onKeyPress={pressHandler}
         onKeyUp={moveEvent}
+        onInput={onInput}
       />
       <input
         className="form-pin-baru"
@@ -65,6 +71,7 @@ const Pin = () => {
         maxlength="1"
         id="six"
         onKeyPress={pressHandler}
+        onInput={onInput}
       />
     </div>
   </form>

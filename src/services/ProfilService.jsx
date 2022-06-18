@@ -68,17 +68,55 @@ export const deletePhoneNumber = async () => {
   console.log(response);
   return response;
 };
-
 export const changePassword = async (data) => {
   const email = getEmail();
   const url = `${API_PAYPAY}/change-pass/${email}`;
-  const headers = getHeaders;
-  const response = await Api(
-    {
-      url,
-      data,
-      method: "put",
-      headers
-    }
-  )
-}
+  const headers = getHeaders();
+  const response = await Api({
+    url,
+    method: "put",
+    data,
+    headers
+  });
+  console.log(response);
+  return response;
+};
+
+export const changePin = async (data) => {
+  const email = getEmail();
+  const url = `${API_PAYPAY}/change-pin/${email}`;
+  const headers = getHeaders();
+  const response = await Api({
+    url,
+    method: "put",
+    data,
+    headers
+  });
+  console.log(response);
+  return response;
+};
+export const checkPin = async (data) => {
+  const email = getEmail();
+  const url = `${API_PAYPAY}/check-pin/${email}`;
+  const headers = getHeaders();
+  const response = await Api({
+    url,
+    method: "post",
+    data,
+    headers
+  });
+  console.log(response);
+  return response;
+};
+
+export const getAllUser = async () => {
+  const url = `${API_PAYPAY}/get-all-user`;
+  const headers = getHeaders();
+  const response = await Api({
+    url,
+    method: "get",
+    headers
+  });
+  console.log(response);
+  return response;
+};

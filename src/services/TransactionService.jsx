@@ -43,3 +43,31 @@ export const HistoryService = async () =>{
     )
   return response;
 }
+
+export const transferService= async (data) =>{
+    const headers = getHeaders();
+    const email = getEmail();
+    const url = `${API_PAYPAY}/transfer/${email}`
+    const response = await Api(
+        {
+            url,
+            data,
+            method:"post",
+            headers
+        }
+    )
+  return response;
+}
+export const updateBalance= async (email) =>{
+    const headers = getHeaders();
+    const getEmail = email;
+    const url = `${API_PAYPAY}/transaksi/balance/${getEmail}`
+    const response = await Api(
+        {
+            url,
+            method:"put",
+            headers
+        }
+    )
+  return response;
+}

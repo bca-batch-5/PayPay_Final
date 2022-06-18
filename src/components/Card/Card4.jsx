@@ -2,9 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/Card/card.css";
 const Card4 = (props) => {
-  const { image, cardTitle, cardSubtitle,link } = props;
+  const { image, cardTitle, cardSubtitle,link} = props;
+  
+  function moveToLocal(){
+    localStorage.setItem("emailReceiver", cardSubtitle);
+  }
+  
   return (
-    <div className="card-box4">
+    <div className="card-box4" onClick={moveToLocal}>
         <Link to={link} style={{textDecoration:'none', color:"black", cursor:'pointer'}} >
       <div className="card-inside4">
         <img className="image4" src={image} alt="gambar" />

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import ButtonComp from "../components/Button/ButtonComp";
 import RightBox from "../components/RightBox/RightBox";
 import HomeLayouts from "../Layouts/HomeLayouts/HomeLayouts";
+import { changePassword } from "../services/ProfilService";
 import '../styles/ChangePassword/styleChangePassword.css'
 const ChangePassword = () => {
     const [passwordBox1,setPasswordBox1] = useState('password-box');
@@ -22,7 +23,9 @@ const ChangePassword = () => {
     const [eye2, setEye2]= useState('eye');
     const [eye3, setEye3]= useState('eye');
     const [changeButton, setChangeButton] =useState('change-button')
-
+    const [inputPass1Value, setInputPass1Value] =useState();
+    const [inputPass2Value, setInputPass2Value] =useState();
+    const [inputPass3Value, setInputPass3Value] =useState();
     function eyeChange1() {
         if (iconEye1 == 'fa-eye-slash') {
             setIconEye1('fa-eye')
@@ -56,11 +59,11 @@ const ChangePassword = () => {
             setEye1('eye-color')
             setPasswordBox1('password-box-color')
             setLock1('lock-color')
+            setInputPass1Value(e.target.value)
         }else{
             setEye1('eye')
             setPasswordBox1('password-box')
             setLock1('lock')
-
         }
     }
     function inputPass2(e){
@@ -68,6 +71,7 @@ const ChangePassword = () => {
             setEye2('eye-color')
             setPasswordBox2('password-box-color')
             setLock2('lock-color')
+            setInputPass2Value(e.target.value)
         }else{
             setEye2('eye')
             setPasswordBox2('password-box')
@@ -80,6 +84,7 @@ const ChangePassword = () => {
             setPasswordBox3('password-box-color')
             setLock3('lock-color')
             setChangeButton('change-button-color')
+            setInputPass3Value(e.target.value)
         }else{
             setEye3('eye')
             setPasswordBox3('password-box')
@@ -88,6 +93,15 @@ const ChangePassword = () => {
         }
     }
 
+    const changePass = async() =>{
+      const data = {
+        password: inputPass1Value,
+        newPassword: inputPass2Value,
+        checkNewPassword: inputPass3Value
+      };
+      const res = await changePassword(data);
+      console.log(res);
+    };
 
   return (
     <HomeLayouts halaman='profile'>
@@ -152,8 +166,8 @@ const ChangePassword = () => {
           <br />
           <br />
           <br />
-          <Link to={'#'}>
-          <button className={changeButton}>Change Password</button>
+          <Link to={'/profil'}>
+          <button className={changeButton} onClick={changePass}>Change Password</button>
           </Link>
         </form>
       </RightBox>
