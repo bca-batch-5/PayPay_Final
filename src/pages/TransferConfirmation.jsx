@@ -34,7 +34,6 @@ const TransferConfirmation = () => {
       setConfirmPin("confirm-pin");
     }
   } 
-
   function getCurrentDate() {
     var today = new Date();
     var monthTemp = parseInt(today.getMonth());

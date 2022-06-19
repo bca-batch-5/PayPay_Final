@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import Card5 from "../components/Card/Card5";
 import RightBox from "../components/RightBox/RightBox";
 import HomeLayouts from "../Layouts/HomeLayouts/HomeLayouts";
 import people1 from "../Assets/Ragil.png";
 import "../styles/Transfer/styleTransferInput.css";
-import { Button } from "../styles/Button/buttonStyle";
-import { Link } from "react-router-dom";
 import ButtonComp from "../components/Button/ButtonComp";
-import { getUserbyEmail, getUserReceiverbyEmail } from "../services/UserService";
+import {
+  getUserbyEmail,
+  getUserReceiverbyEmail,
+} from "../services/UserService";
 import { toBeEmpty } from "@testing-library/jest-dom/dist/matchers";
 import NumberFormat from "react-number-format";
+import { useCallback } from "react";
 const TransferInput = () => {
   const [color, setColor] = useState();
   const [textColor, setTextColor] = useState();
   const [nama, setNama] = useState();
   const [email, setEmail] = useState();
   const [nominal, setNominal] = useState();
-  const [balance,setBalance] = useState();
+  const [balance, setBalance] = useState();
+  const [direction,setDirection] = useState("")
+  const [errorDisplay, setErrorDisplay] = useState("none")
+
+  const navigate = useNavigate();
   function inputText(e) {
     if (e.target.value != "") {
       setTextColor("#6379F4");
@@ -26,34 +33,34 @@ const TransferInput = () => {
       setTextColor("grey");
     }
   }
-
+  
   function inputNominal(e) {
     if (e.target.value != toBeEmpty) {
       setColor("#6379F4");
-      setNominal(e.target.value.replace(/[^0-9]+/g,""));
-      console.log(nominal);
+      setNominal(e.target.value.replace(/[^0-9]+/g, ""));
     }
   }
-
-  function formatRupiah(angka, prefix) {
-    var number_string = angka.replace(/[^,\d]/g, "").toString(),
-      split = number_string.split(","),
-      sisa = split[0].length % 3,
-      rupiah = split[0].substr(0, sisa),
-      ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-    // tambahkan titik jika yang di input sudah menjadi angka satuan ribuan
-    if (ribuan) {
-      let separator = sisa ? "." : "";
-      rupiah += separator + ribuan.join(".");
-    }
-
-    rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-    return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
-  }
+  
+  localStorage.setItem("nominalTransfer", nominal);
 
   function setLocal() {
-    localStorage.setItem("nominalTransfer", nominal);
+    if (nominal != null && localStorage.getItem("nominalTransfer") <= balance) {
+      setTimeout(() => {
+          
+        navigate("/transfer/confirmation")
+      }, 0);
+    } else if(nominal == null && localStorage.getItem("nominalTransfer") > balance) {
+      setDirection("#");
+    }
+    checkSaldo();
+  }
+
+  function checkSaldo(){
+    if (localStorage.getItem("nominalTransfer") <= balance) {
+      setErrorDisplay("none")
+    }else if (localStorage.getItem("nominalTransfer") > balance) {
+      setErrorDisplay("block")
+    }
   }
 
   useEffect(() => {
@@ -65,8 +72,7 @@ const TransferInput = () => {
     const res = await getUserbyEmail();
     console.log("userdetail res", res);
     setBalance(res.data.data.saldo);
-  }
-
+  };
 
   const getUser = async () => {
     const email = localStorage.getItem("emailReceiver");
@@ -88,23 +94,15 @@ const TransferInput = () => {
         <div className="transfer-input-box">
           <div className="in-transfer-input-box">
             <div className="input-nominal-box">
-              {/* <input
-                style={{ color: color }}
-                className="input-nominal"
-                type="text"
-                value={nominal}
-                placeholder="0.00"
-                onChange={inputNominal}
-              /> */}
               <NumberFormat
-                style={{color:color}}
+                style={{ color: color }}
                 className="input-nominal"
                 thousandsGroupStyle="thousand"
                 value={nominal}
                 prefix="Rp"
                 decimalSeparator=","
                 displayType="input"
-                type="text"
+                type="input"
                 thousandSeparator="."
                 maxLength="13"
                 placeholder="0.00"
@@ -112,7 +110,7 @@ const TransferInput = () => {
                 allowNegative={true}
               />
               <h4 style={{ fontSize: "20px" }}>
-              <NumberFormat
+                <NumberFormat
                   thousandsGroupStyle="thousand"
                   value={balance}
                   prefix="Rp "
@@ -121,8 +119,10 @@ const TransferInput = () => {
                   type="text"
                   thousandSeparator="."
                   allowNegative={true}
-                /><span> Available</span>
+                />
+                <span> Available</span>
               </h4>
+              <h4 style={{color:"red", display:errorDisplay}}>Saldo Anda tidak mencukupi</h4>
             </div>
             <div
               style={{ borderBottomColor: textColor }}
@@ -138,19 +138,20 @@ const TransferInput = () => {
               />
             </div>
             <div className="button-box">
-              <Link to={"/transfer/confirmation"}>
-                <ButtonComp
-                  color="white"
-                  backgroundColor="#6379F4"
-                  width="150px"
-                  bgHover="white"
-                  colorHover="#6379F4"
-                  border="1px solid black"
-                  borderHover="1px solid black"
-                  onClick = {setLocal}
-                >
-                  Continue
-                </ButtonComp>
+              <Link to={direction} >
+              <ButtonComp
+                color="white"
+                backgroundColor="#6379F4"
+                width="150px"
+                bgHover="white"
+                colorHover="#6379F4"
+                border="1px solid black"
+                borderHover="1px solid black"
+                onClick={setLocal}
+                
+              >
+                Continue
+              </ButtonComp>
               </Link>
             </div>
           </div>

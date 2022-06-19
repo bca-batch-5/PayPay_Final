@@ -1,8 +1,8 @@
 .button-box-succes{
     display: flex;
     width: 45%;
-    justify-content: space-between;
+    justify-content: right;
     margin-top: 100px;
-    margin-left: 55%;
+    margin-left: 50%;
 }
 

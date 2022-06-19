@@ -16,7 +16,6 @@ const TransferSucces = () => {
   const [email, setEmail] = useState();
   const [lastBalance,setLastBalance] = useState();
 
-
   function getCurrentDate() {
     var today = new Date();
      var dateNow = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear();
@@ -41,6 +40,11 @@ const TransferSucces = () => {
   const User = async () =>{
     const res = await getUserbyEmail();
     setLastBalance(res.data.data.saldo);
+  }
+
+  function clearNotes() {
+    localStorage.removeItem("notes")
+    localStorage.removeItem("nominalTransfer")
   }
   return (
     <HomeLayouts halaman="transfer">
@@ -85,30 +89,7 @@ const TransferSucces = () => {
         />
         <br />
         <div className="button-box-succes">
-              <ButtonComp
-                color="white"
-                backgroundColor="rgba(99, 121, 244, 0.15)"
-                width="50px"
-                bgHover="white"
-                colorHover="#6379F4"
-                border="1px solid black"
-                borderHover="1px solid black"
-              >
-                <i className='fa fa-share' style={{color:'#6379F4'}}></i>
-              </ButtonComp>
-              <ButtonComp
-                color="#6379F4"
-                backgroundColor="rgba(99, 121, 244, 0.15);"
-                width="150px"
-                bgHover="white"
-                colorHover="#6379F4"
-                border="1px solid black"
-                borderHover="1px solid black"
-              >
-                <i className='fa fa-download' style={{marginRight: "10px",color:"#6379F4"}}></i>
-                Download PDF
-              </ButtonComp>
-                <Link to={'/home'}>
+              <Link to={'/home'}>
               <ButtonComp
                 color="white"
                 backgroundColor="#6379F4"
@@ -117,6 +98,7 @@ const TransferSucces = () => {
                 colorHover="#6379F4"
                 border="1px solid black"
                 borderHover="1px solid black"
+                onClick={clearNotes}
               >
                 Back to Home
               </ButtonComp>

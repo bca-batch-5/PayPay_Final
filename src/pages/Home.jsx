@@ -69,6 +69,10 @@ const Home = () => {
     )
   ]
 
+  const historyBox = () =>{
+    
+  }
+
   function kreditLoop() {
     let total= 0;
     for (let i = 0; i < mappingKredit[0].length; i++) {
@@ -125,6 +129,7 @@ const Home = () => {
               <p style={{ color: "#E0E0E0", fontSize: "15px" }}>{noTelp}</p>
             </div>
             <div className="box-biru-button">
+              <Link to={"/transfer"}>
               <ButtonComp
                 color="white"
                 backgroundColor="#FFFFFF33"
@@ -136,7 +141,9 @@ const Home = () => {
               >
                 Transfer
               </ButtonComp>
+              </Link>
               <br />
+              <Link to={"/topup"}>
               <ButtonComp
                 color="white"
                 backgroundColor="#FFFFFF33"
@@ -148,6 +155,7 @@ const Home = () => {
               >
                 Top Up
               </ButtonComp>
+              </Link>
             </div>
           </div>
         </div>

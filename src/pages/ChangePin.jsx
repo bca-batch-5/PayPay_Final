@@ -1,23 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import Pin from "../components/PinForm/Pin";
 import RightBox from "../components/RightBox/RightBox";
 import HomeLayouts from "../Layouts/HomeLayouts/HomeLayouts";
 import { changePin, checkPin } from "../services/ProfilService";
 import "../styles/ChangePin/styleChangePin.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ChangePin = () => {
   const [display1, setDisplay1] = useState("block");
   const [display2, setDisplay2] = useState("none");
   const [pin, setPin] = useState([]);
   const [newPin, setNewPin] = useState([]);
-  function continueButton() {
-    if (display1 == "block") {
-      setDisplay1("none");
-      setDisplay2("block");
-      checkPinButton();
-    }
-  }
-
+  const navigate = useNavigate();
   function getValue(e) {
     if (e.target.value != "") {
       setPin([...pin, e.target.value]);
@@ -35,6 +30,26 @@ const ChangePin = () => {
     };
     const res = await checkPin(data);
     console.log("checkpin res", res);
+    if (res.data.status == 400) {
+      toast.error("Your Pin is Wrong", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+      setTimeout(() => {
+          
+        navigate("/profil")
+      },2000);
+    }else if(res.data.status == 200){
+      if (display1 == "block") {
+        setDisplay1("none");
+        setDisplay2("block");
+      }
+    }
   };
 
   const changePinButton = async () => {
@@ -43,7 +58,21 @@ const ChangePin = () => {
     };
     const res = await changePin(data);
     console.log("change pin res", res);
+    if (res.data.status == 200) {
+      toast.success("Your Pin has been changed", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+      setTimeout(() => {
+        navigate("/profil")
+      },2000);
   };
+};
 
   return (
     <HomeLayouts halaman="profile">
@@ -58,7 +87,7 @@ const ChangePin = () => {
           <Pin onInput={getValue} />
           <br />
           <button
-            onClick={continueButton}
+            onClick={checkPinButton}
             style={{ display: display1 }}
             className="change-button-pin"
           >
@@ -74,7 +103,6 @@ const ChangePin = () => {
         <div style={{ display: display2 }} className="pin-box">
           <Pin onInput={getValue2} />
           <br />
-          <Link to={"/profil"} style={{textDecoration:"none"}}>
             <button
               style={{ display: display2 }}
               className="change-button-pin"
@@ -82,9 +110,19 @@ const ChangePin = () => {
             >
               Change Pin
             </button>
-          </Link>
         </div>
       </RightBox>
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
     </HomeLayouts>
   );
 };
