@@ -8,7 +8,9 @@ import { getAllUser } from "../services/ProfilService";
 const Transfer = () => {
   const [userDetail, setUserDetail] = useState([]);
   useEffect(() => {
-    getUser();
+    if (localStorage.getItem("user") != null) {
+      getUser();
+    }
   }, []);
 
   const getUser = async () => {

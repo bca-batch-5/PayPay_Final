@@ -62,7 +62,6 @@ const HomeLayouts = (props) => {
     getUserData();
     getPhotoProfil();
     checkingTokenAvailable();
-    console.log(photoProfile);
     notification();
     sessionNoToken();
     sessionExpired();
@@ -129,10 +128,13 @@ const HomeLayouts = (props) => {
   };
 
   const getUserData = async () => {
-    const response = await getUserbyEmail();
-    setNama(response.data.data.nama);
-    if (response.data.data.noTelp != null) {
-      setNoTelp(response.data.data.noTelp);
+    if (localStorage.getItem("user") != null) {
+      const response = await getUserbyEmail();
+      console.log(response);
+      setNama(response.data.data.nama);
+      if (response.data.data.noTelp != null) {
+        setNoTelp(response.data.data.noTelp);
+      }
     }
   };
 
@@ -249,16 +251,18 @@ const HomeLayouts = (props) => {
                       key={el.id}
                       tipe={el.transactionType}
                       description={el.note}
-                      nominal={<NumberFormat
-                        thousandsGroupStyle="thousand"
-                        value={el.nominal}
-                        prefix="Rp "
-                        decimalSeparator=","
-                        displayType="text"
-                        type="text"
-                        thousandSeparator="."
-                        allowNegative={true}
-                      />}
+                      nominal={
+                        <NumberFormat
+                          thousandsGroupStyle="thousand"
+                          value={el.nominal}
+                          prefix="Rp "
+                          decimalSeparator=","
+                          displayType="text"
+                          type="text"
+                          thousandSeparator="."
+                          allowNegative={true}
+                        />
+                      }
                     />
                   );
                 })

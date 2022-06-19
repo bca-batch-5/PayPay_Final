@@ -28,8 +28,10 @@ export const Profile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getPhotoProfil();
-    getUserData();
+    if (localStorage.getItem("user") != null) {
+      getPhotoProfil();
+      getUserData();
+    }
   }, []);
 
   // const setFotoToLocal = () => {
