@@ -29,9 +29,8 @@ export const getPhoto = async () => {
   return url;
 };
 
-export const getPhotoByEmail = async (email) => {
-  const emailget = email;
-  const url = `${API_PAYPAY}/img/${emailget}`;
+export const getPhotoByEmail = async (urlImage) => {
+  const url = urlImage;
   const response = await Api({
     url,
     method: "get",
