@@ -37,12 +37,12 @@ const Home = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("user") != null) {
-  //   kreditLoop();
-  //   debitLoop();
-  //   }
-  // });
+  useEffect(() => {
+    if (localStorage.getItem("user") != null) {
+    kreditLoop();
+    debitLoop();
+    }
+  });
 
   const getTransactionKredit = async () => {
     
@@ -69,21 +69,21 @@ const Home = () => {
     }),
   ];
 
-  // function kreditLoop() {
-  //   let total = 0;
-  //   for (let i = 0; i < mappingKredit[0].length; i++) {
-  //     total = total + mappingKredit[0][i];
-  //   }
-  //   setKreditTotal(total);
-  // }
+  function kreditLoop() {
+    let total = 0;
+    for (let i = 0; i < mappingKredit[0].length; i++) {
+      total = total + mappingKredit[0][i];
+    }
+    setKreditTotal(total);
+  }
 
-  // function debitLoop() {
-  //   let total = 0;
-  //   for (let i = 0; i < mappingDebit[0].length; i++) {
-  //     total = total + mappingDebit[0][i];
-  //   }
-  //   setDebitTotal(total);
-  // }
+  function debitLoop() {
+    let total = 0;
+    for (let i = 0; i < mappingDebit[0].length; i++) {
+      total = total + mappingDebit[0][i];
+    }
+    setDebitTotal(total);
+  }
 
   const getUserData = async () => {
     

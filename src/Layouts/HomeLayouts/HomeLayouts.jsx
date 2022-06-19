@@ -244,31 +244,7 @@ const HomeLayouts = (props) => {
               Last Transaction
             </p>
             <div style={{ marginTop: "10px" }}>
-              {transaction.length > 0 ? (
-                transaction.map((el) => {
-                  return (
-                    <TransactionBox2
-                      key={el.id}
-                      tipe={el.transactionType}
-                      description={el.note}
-                      nominal={
-                        <NumberFormat
-                          thousandsGroupStyle="thousand"
-                          value={el.nominal}
-                          prefix="Rp "
-                          decimalSeparator=","
-                          displayType="text"
-                          type="text"
-                          thousandSeparator="."
-                          allowNegative={true}
-                        />
-                      }
-                    />
-                  );
-                })
-              ) : (
-                <p>No Transaction Available</p>
-              )}
+             
             </div>
           </InNotifBox>
         </NotifBox>
