@@ -32,6 +32,7 @@ import {
   deleteToken,
   tokenExpired,
 } from "../../Util/TokenSession";
+import NumberFormat from "react-number-format";
 
 const HomeLayouts = (props) => {
   const { children, halaman, nomorTelfon, photoProfile } = props;
@@ -248,7 +249,16 @@ const HomeLayouts = (props) => {
                       key={el.id}
                       tipe={el.transactionType}
                       description={el.note}
-                      nominal={el.nominal}
+                      nominal={<NumberFormat
+                        thousandsGroupStyle="thousand"
+                        value={el.nominal}
+                        prefix="Rp "
+                        decimalSeparator=","
+                        displayType="text"
+                        type="text"
+                        thousandSeparator="."
+                        allowNegative={true}
+                      />}
                     />
                   );
                 })
