@@ -39,21 +39,25 @@ const Chart = () => {
       }
       
       const mappingKredit = [
-        transaksiKredit.map((el) =>{
-          return(
-            el.nominal
+        transaksiKredit.length > 0 ? (
+          transaksiKredit.map((el) =>{
+            return(
+              el.nominal
+            )
+          }
           )
-        }
-        )
+        ):([0,0,0,0,0,0])
       ]
 
       const mappingDebit = [
-        transaksiDebit.map((el) =>{
-          return(
-            el.nominal
+        transaksiDebit.length > 0 ? (
+          transaksiDebit.map((el) =>{
+            return(
+              el.nominal
+            )
+          }
           )
-        }
-        )
+        ):([0,0,0,0,0,0])
       ]
 
       console.log("maping kredit res",mappingKredit);
