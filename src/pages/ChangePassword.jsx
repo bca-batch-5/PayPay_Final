@@ -1,11 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ButtonComp from "../components/Button/ButtonComp";
 import RightBox from "../components/RightBox/RightBox";
 import HomeLayouts from "../Layouts/HomeLayouts/HomeLayouts";
 import { changePassword } from "../services/ProfilService";
 import '../styles/ChangePassword/styleChangePassword.css'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ChangePassword = () => {
     const [passwordBox1,setPasswordBox1] = useState('password-box');
     const [passwordBox2,setPasswordBox2] = useState('password-box');
@@ -26,6 +28,10 @@ const ChangePassword = () => {
     const [inputPass1Value, setInputPass1Value] =useState();
     const [inputPass2Value, setInputPass2Value] =useState();
     const [inputPass3Value, setInputPass3Value] =useState();
+    const [linkCheck,setLinkCheck] = useState("");
+    const [textDisplay1,setTextDisplay1] = useState("checking-text");
+
+    const navigate = useNavigate();
     function eyeChange1() {
         if (iconEye1 == 'fa-eye-slash') {
             setIconEye1('fa-eye')
@@ -100,7 +106,25 @@ const ChangePassword = () => {
         checkNewPassword: inputPass3Value
       };
       const res = await changePassword(data);
-      console.log(res);
+      console.log(res)
+      if (res.data.status == 400) {
+        setLinkCheck("#")
+        setTextDisplay1("checking-text-valid")
+      }else if(res.data.status === 202) {
+        toast.success("Change Password Success", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          
+          navigate("/profil")
+        }, 2000);
+      }
     };
 
   return (
@@ -164,13 +188,25 @@ const ChangePassword = () => {
             </div>
           </div>
           <br />
+            <h4 className={textDisplay1}>Password lama yang anda masukkan salah</h4>
           <br />
           <br />
-          <Link to={'/profil'}>
+          <Link to={linkCheck}>
           <button className={changeButton} onClick={changePass}>Change Password</button>
           </Link>
         </form>
       </RightBox>
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
     </HomeLayouts>
   );
 };

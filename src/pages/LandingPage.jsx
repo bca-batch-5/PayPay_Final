@@ -58,21 +58,6 @@ const LandingPage = () => {
                 We bring you a mobile app for banking problems that oftenly
                 wasting much of your times.
               </p>
-              <div className="button-one">
-                <Link to={`/signin`}>
-                  <ButtonComp
-                    color="white"
-                    backgroundColor="#6379F4"
-                    width="150px"
-                    bgHover="white"
-                    colorHover="#6379F4"
-                    border="2px solid white"
-                    borderHover="2px solid #6379F4"
-                  >
-                    Try it Free
-                  </ButtonComp>
-                </Link>
-              </div>
             </div>
           </div>
         </PageOneLeft>
@@ -175,8 +160,8 @@ const LandingPage = () => {
             </h1>
             <Card2
               number="1. "
-              cardTitle2="Small Fee"
-              cardSubtitle2="We only charge 5% of every success transaction done in PayPay app."
+              cardTitle2="No Fee"
+              cardSubtitle2="We did'nt charge anything of every success transaction done in PayPay app."
             />
             <Card2
               number="2. "
