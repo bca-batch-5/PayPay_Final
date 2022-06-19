@@ -188,7 +188,7 @@ const ChangePassword = () => {
             </div>
           </div>
           <br />
-            <h4 className={textDisplay1}>Password lama yang anda masukkan salah</h4>
+            <h4 className={textDisplay1}>Your password is Incorrect</h4>
           <br />
           <br />
           <Link to={linkCheck}>

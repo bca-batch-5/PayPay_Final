@@ -20,7 +20,7 @@ const Transfer = () => {
   };
 
   return (
-    <HomeLayouts halaman="transfer">
+    <HomeLayouts halaman="transferSearch">
       <RightBox>
         <h4>Search Receiver</h4>
         <div className="search-box">

@@ -50,7 +50,7 @@ const HomeLayouts = (props) => {
   const [foto, setFoto] = useState("");
   const [nama, setNama] = useState();
   const [transaction, setTransaction] = useState([]);
-  // const [tipe, setTipe] = useState("");
+  const [marginTop, setMarginTop] = useState();
   // const [description,setDescription] = useState("");
   // const [nominal,setNominal] = useState("");
 
@@ -190,12 +190,15 @@ const HomeLayouts = (props) => {
     if (halaman === "home") {
       setDashboard(dashboardImgBlue);
       setLeftTextDashboard("left-text-color");
-    } else if (halaman === "transfer") {
+    } else if (halaman === "transfer"|| halaman === "transferSearch") {
       setTransfer(transferImgBlue);
       setLeftTextTransfer("left-text-color");
     } else if (halaman === "profile") {
       setProfile(profileImgBlue);
       setLeftTextProfile("left-text-color");
+    }
+    if (halaman === "transferSearch") {
+      setMarginTop("250px")
     }
   }
 
@@ -211,6 +214,7 @@ const HomeLayouts = (props) => {
       navigate("/");
     }
   }
+
 
   return (
     <div className="layouts-box" id={halaman}>
@@ -244,7 +248,7 @@ const HomeLayouts = (props) => {
               Last Transaction
             </p>
             <div style={{ marginTop: "10px" }}>
-              {/* {transaction.length > 0 ? (
+              {transaction && transaction.length > 0 ? (
                 transaction.map((el) => {
                   return (
                     <TransactionBox2
@@ -268,7 +272,7 @@ const HomeLayouts = (props) => {
                 })
               ) : (
                 <p>No Transaction Available</p>
-              )} */}
+              )}
             </div>
           </InNotifBox>
         </NotifBox>
@@ -326,7 +330,7 @@ const HomeLayouts = (props) => {
                 </Link>
               </div>
               <br />
-              <div className="left-box-text">
+              <div className="left-box-text" style={{marginTop:marginTop}}>
                 <img src={logout} alt="" />
                 <p
                   className={leftTextLogout}
