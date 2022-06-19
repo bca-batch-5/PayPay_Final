@@ -1,0 +1,25 @@
+.image-phone2{
+    position: absolute;
+  left: 115px;
+}
+.image-phone1{
+  position: absolute;
+  z-index: 1;
+  left: 265px;
+}
+.border-auth{
+  display: flex;
+}
+.border-title{
+  display: flex;
+  align-items: center;
+  font-size: 35px;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  transition: all 1s;
+}
+
+.border-title:hover{
+  color: rgba(213, 255, 254, 0.793);
+}

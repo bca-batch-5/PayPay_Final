@@ -1,0 +1,22 @@
+.pin-box{
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 100px;
+}
+
+.change-button-pin{
+    margin:50px 0px;
+    width:50%;
+    margin-left: 25%;
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    color: #88888F ;
+    background-color: #DADADA;
+}
+
+.change-button-pin:hover{
+    color: white ;
+    background-color: #6379F4;
+}

@@ -1,0 +1,54 @@
+.layouts-box{
+    background-color: #FAFCFF;
+    /* height: 100%; */
+}
+
+.main-layouts{
+    display: flex;
+    padding: 40px 130px 133px 130px;
+}
+
+/* left box style */
+
+.left-box-text{
+    display: flex;
+    align-items: center;
+}
+
+.left-text{
+    margin-left: 30px;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.left-text-color{
+    margin-left: 30px;
+    text-decoration: none;
+    color: #6379F4;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+
+/* footer style */
+.footer-box{
+    background-color: #6379F4;
+    height: 60px;
+}
+
+.footer-inbox{
+    padding: 20px 90px 20px 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.right-footer-text{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    width: 350px;
+    color: #EFEFEF;
+}

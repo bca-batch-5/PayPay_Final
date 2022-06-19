@@ -1,0 +1,123 @@
+.card-box{
+    width: 350px;
+    height: 350px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.card-inside{
+    text-align: center;
+    padding-top: 60px;
+}
+
+.circle-purple{
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    background-color: #473AD11A;
+    margin-left: 41%;
+
+}
+
+.image{
+    padding: 15px;
+}
+
+.title-card{
+    margin-top: 30px;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.subtitle-card{
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+/* card 2 */
+
+.card-box2{
+    width: 90%;
+    height: 75px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.card-inside2{
+    padding-top: 10px;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.title-card2{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.subtitle-card2{
+    font-size: 16px;
+}
+
+
+/* card 4 dan 5 */
+
+.card-box4{
+    width: 100%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.card-inside4{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.title-card4{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.subtitle-card4{
+    font-size: 20px;
+    color: #7A7886;
+}
+
+
+/* card 6 */
+
+.card-box6{
+    width: 100%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.card-inside6{
+    padding: 20px;
+}
+
+.title-card6{
+    font-size: 20px;
+    color: #7A7886;
+}
+
+.subtitle-card6{
+    font-size: 25px;
+    font-weight: bold;
+}
+.image4{
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+}
