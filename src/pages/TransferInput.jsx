@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Card5 from "../components/Card/Card5";
 import RightBox from "../components/RightBox/RightBox";
 import HomeLayouts from "../Layouts/HomeLayouts/HomeLayouts";
-import people1 from "../Assets/Ragil.png";
+import people1 from "../Assets/defaultPhoto.jpg";
 import "../styles/Transfer/styleTransferInput.css";
 import ButtonComp from "../components/Button/ButtonComp";
 import {
@@ -13,6 +13,7 @@ import {
 import { toBeEmpty } from "@testing-library/jest-dom/dist/matchers";
 import NumberFormat from "react-number-format";
 import { useCallback } from "react";
+import { getReceiverProfilByEmail } from "../services/TransactionService";
 const TransferInput = () => {
   const [color, setColor] = useState();
   const [textColor, setTextColor] = useState();
@@ -20,8 +21,9 @@ const TransferInput = () => {
   const [email, setEmail] = useState();
   const [nominal, setNominal] = useState();
   const [balance, setBalance] = useState();
-  const [direction,setDirection] = useState("")
-  const [errorDisplay, setErrorDisplay] = useState("none")
+  const [direction,setDirection] = useState("");
+  const [errorDisplay, setErrorDisplay] = useState("none");
+  const [image, setImage] = useState();
 
   const navigate = useNavigate();
   function inputText(e) {
@@ -64,8 +66,9 @@ const TransferInput = () => {
   }
 
   useEffect(() => {
-    getUser();
+    // getUser();
     User();
+    getImageUser();
   }, []);
 
   const User = async () => {
@@ -74,19 +77,28 @@ const TransferInput = () => {
     setBalance(res.data.data.saldo);
   };
 
-  const getUser = async () => {
-    const email = localStorage.getItem("emailReceiver");
-    const res = await getUserReceiverbyEmail(email);
+  // const getUser = async () => {
+  //   const email = localStorage.getItem("emailReceiver");
+  //   const res = await getUserReceiverbyEmail(email);
+  //   console.log(res);
+  //   setNama(res.data.data.nama);
+  //   setEmail(res.data.data.user.email);
+  // };
+
+  const getImageUser = async () => {
+    const res = await getReceiverProfilByEmail(localStorage.getItem("emailReceiver"));
     console.log(res);
     setNama(res.data.data.nama);
-    setEmail(res.data.data.user.email);
+    setEmail(res.data.data.email);
+    setImage(res.data.data.image ? res.data.data.image : people1)
+    
   };
 
   return (
     <HomeLayouts halaman="transfer">
       <RightBox>
         <h4>Transfer Money</h4>
-        <Card5 image={people1} cardTitle={nama} cardSubtitle={email} />
+        <Card5 image={image} cardTitle={nama} cardSubtitle={email} />
         <p style={{ color: "#7A7886", width: "45%", marginTop: "30px" }}>
           Type the amount you want to transfer and then press continue to the
           next steps.

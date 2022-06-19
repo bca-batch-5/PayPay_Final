@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ButtonComp from "../components/Button/ButtonComp";
 import HomeLayouts from "../Layouts/HomeLayouts/HomeLayouts";
-import people1 from "../Assets/Ragil.png";
+import people1 from "../Assets/defaultPhoto.jpg";
 import netflix from "../Assets/Netflix.png";
 import TransactionBox1 from "../components/TransactionBox/TransactionBox1";
 import "../styles/Home/styleHome.css";

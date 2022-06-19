@@ -1,7 +1,7 @@
 import React from 'react'
 import RightBox from '../components/RightBox/RightBox'
 import HomeLayouts from '../Layouts/HomeLayouts/HomeLayouts'
-import people1 from '../Assets/Ragil.png'
+import people1 from "../Assets/defaultPhoto.jpg";
 import netflix from '../Assets/Netflix.png'
 import '../styles/History/HistoryStyle.css'
 import TransactionBox1 from '../components/TransactionBox/TransactionBox1'
@@ -22,7 +22,7 @@ useEffect(() => {
     setHistoryGet(response.data.data);
   };
   return (
-    <HomeLayouts halaman='home'>
+    <HomeLayouts halaman='history'>
       <RightBox>
         <p style={{fontWeight:'bold'}}>Transaction History</p>
         <div className='week-box'>
