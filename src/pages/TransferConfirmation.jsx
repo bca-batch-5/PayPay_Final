@@ -37,7 +37,12 @@ const TransferConfirmation = () => {
 
   function getCurrentDate() {
     var today = new Date();
-     var dateNow = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear();
+    var monthTemp = parseInt(today.getMonth());
+    var monthNow = monthTemp + 1;
+    if(monthNow > 12){
+      monthNow = 1;
+    }
+     var dateNow = today.getDate() + "-" + monthNow + "-" + today.getFullYear();
      console.log(dateNow);
     setDate(dateNow);
   }

@@ -21,6 +21,7 @@
     text-decoration: none;
     color: black;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .left-text-color{
@@ -28,6 +29,7 @@
     text-decoration: none;
     color: #6379F4;
     font-weight: bolder;
+    cursor: pointer;
 }
 
 

@@ -10,7 +10,11 @@ import Chart from "../components/Chart/Chart";
 import arrowGreen from "../Assets/arrow-up-hijau.png";
 import arrowRed from "../Assets/arrow-up-merah.png";
 import { getUserbyEmail } from "../services/UserService";
-import { HistoryHomeService } from "../services/TransactionService";
+import {
+  HistoryHomeService,
+  transactionDebit,
+  transactionKredit,
+} from "../services/TransactionService";
 import { getEmail } from "../API/Api";
 import { getPhotoByEmail } from "../services/ProfilService";
 import NumberFormat from "react-number-format";
@@ -20,11 +24,68 @@ const Home = () => {
   const [noTelp, setNoTelp] = useState("Phone Number is not exist");
   const [foto, setFoto] = useState("");
   const [history, setHistory] = useState([]);
+  const [transaksiKredit, setTransaksiKredit] = useState([]);
+  const [transaksiDebit, setTransaksiDebit] = useState([]);
+  const [kreditTotal, setKreditTotal] = useState();
+  const [debitTotal, setDebitTotal] = useState();
   useEffect(() => {
     getUserData();
     getHistory();
+    getTransactionKredit();
+    getTransactionDebit();
+    kreditLoop();
     console.log("hai");
-  }, []);
+  },[]);
+
+  useEffect(() => {
+    kreditLoop();
+    debitLoop();
+  });
+
+  const getTransactionKredit = async () => {
+    const res = await transactionKredit();
+    console.log("transaksi kredit", res);
+    setTransaksiKredit(res.data.data);
+  };
+
+  const getTransactionDebit = async () => {
+    const res = await transactionDebit();
+    console.log("Transaksi Debit", res);
+    setTransaksiDebit(res.data.data);
+  };
+
+  const mappingKredit = [
+    transaksiKredit.map((el) => {
+      return el.nominal;
+    }),
+  ];
+
+  const mappingDebit = [
+    transaksiDebit.map((el) =>{
+      return(
+        el.nominal
+      )
+    }
+    )
+  ]
+
+  function kreditLoop() {
+    let total= 0;
+    for (let i = 0; i < mappingKredit[0].length; i++) {
+      total = total + mappingKredit[0][i];
+    }
+    console.log("total:", total)
+    setKreditTotal(total);
+  }
+
+  function debitLoop() {
+    let total= 0;
+    for (let i = 0; i < mappingDebit[0].length; i++) {
+      total = total + mappingDebit[0][i];
+    }
+    console.log("total:", total)
+    setDebitTotal(total);
+  }
 
   const getUserData = async () => {
     const response = await getUserbyEmail();
@@ -59,7 +120,6 @@ const Home = () => {
                   thousandSeparator="."
                   allowNegative={true}
                 />
-                
               </p>
               <br />
               <p style={{ color: "#E0E0E0", fontSize: "15px" }}>{noTelp}</p>
@@ -107,7 +167,16 @@ const Home = () => {
                   <p>Kredit</p>
                   <br />
                   <p style={{ color: "green", fontWeight: "bolder" }}>
-                    <span>Rp.</span>20.000.000.000
+                  <NumberFormat
+                  thousandsGroupStyle="thousand"
+                  value={kreditTotal}
+                  prefix="Rp "
+                  decimalSeparator=","
+                  displayType="text"
+                  type="text"
+                  thousandSeparator="."
+                  allowNegative={true}
+                />
                   </p>
                 </div>
                 <div style={{ textAlign: "right" }} className="Debit">
@@ -116,7 +185,16 @@ const Home = () => {
                   <p>Debit</p>
                   <br />
                   <p style={{ color: "red", fontWeight: "bolder" }}>
-                    <span>Rp.</span>20.000.000.000
+                  <NumberFormat
+                  thousandsGroupStyle="thousand"
+                  value={debitTotal}
+                  prefix="Rp "
+                  decimalSeparator=","
+                  displayType="text"
+                  type="text"
+                  thousandSeparator="."
+                  allowNegative={true}
+                />
                   </p>
                 </div>
               </div>
@@ -146,24 +224,26 @@ const Home = () => {
               </div>
               {history.length > 0 ? (
                 history.map((el) => {
-                  if(el.from == null){
+                  if (el.from == null) {
                     return (
-                      <TransactionBox1 key={el.id}
+                      <TransactionBox1
+                        key={el.id}
                         imgSrc={people1}
                         nama={el.to.userName}
                         tipe={el.transactionType}
                         nominal={el.nominal}
                       />
                     );
-                  }else if(el.to == null){
-                    return(
-                      <TransactionBox1 key={el.id}
-                          imgSrc={people1}
-                          nama={el.from.userName}
-                          tipe={el.transactionType}
-                          nominal={el.nominal}
-                        />
-                    )
+                  } else if (el.to == null) {
+                    return (
+                      <TransactionBox1
+                        key={el.id}
+                        imgSrc={people1}
+                        nama={el.from.userName}
+                        tipe={el.transactionType}
+                        nominal={el.nominal}
+                      />
+                    );
                   }
                 })
               ) : (
