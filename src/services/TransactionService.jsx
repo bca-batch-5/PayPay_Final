@@ -71,3 +71,31 @@ export const updateBalance= async (email) =>{
     )
   return response;
 }
+
+export const transactionKredit= async () =>{
+    const headers = getHeaders();
+    const email = getEmail();
+    const url = `${API_PAYPAY}/transaksi/limit7/Kredit/${email}`
+    const response = await Api(
+        {
+            url,
+            method:"get",
+            headers
+        }
+    )
+  return response;
+}
+
+export const transactionDebit= async () =>{
+    const headers = getHeaders();
+    const email = getEmail();
+    const url = `${API_PAYPAY}/transaksi/limit7/Debit/${email}`
+    const response = await Api(
+        {
+            url,
+            method:"get",
+            headers
+        }
+    )
+  return response;
+}
