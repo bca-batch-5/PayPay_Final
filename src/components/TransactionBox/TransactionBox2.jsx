@@ -26,7 +26,7 @@ const TransactionBox2 = (props) => {
         <img id={tipe} src={arrowImg} alt="arrow" />
       <div className="transaction-box-detail2">
         <p style={{ color:'#7A7A7A', fontSize: "18px" }}>{description}</p>
-        <NominalBox color='black'>Rp.{nominal}</NominalBox>
+        <NominalBox color='black'>{nominal}</NominalBox>
       </div>
         </div>
     </div>
