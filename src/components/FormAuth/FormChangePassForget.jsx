@@ -28,13 +28,10 @@ const FormChangePassForget = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("Page valid " + pageValid);
     if (pageValid != undefined) {
       if (pageValid === "change-pass") {
         setFormDisplay("form-display");
-        console.log("Form ada : " + formDisplay);
       } else {
-        console.log("Page valid tidak ada");
         setFormDisplay("form-no-display");
       }
     }

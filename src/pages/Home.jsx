@@ -29,31 +29,34 @@ const Home = () => {
   const [kreditTotal, setKreditTotal] = useState();
   const [debitTotal, setDebitTotal] = useState();
   useEffect(() => {
-    getUserData();
-    getHistory();
-    getTransactionKredit();
-    getTransactionDebit();
-    kreditLoop();
-    console.log("hai");
-  },[]);
+    if (localStorage.getItem("user") != null) {
+      getUserData();
+      getHistory();
+      getTransactionKredit();
+      getTransactionDebit();
+    }
+  }, []);
 
   useEffect(() => {
+    if (localStorage.getItem("user") != null) {
     kreditLoop();
     debitLoop();
+    }
   });
 
   const getTransactionKredit = async () => {
-    const res = await transactionKredit();
-    console.log("transaksi kredit", res);
-    setTransaksiKredit(res.data.data);
+    
+      const res = await transactionKredit();
+      setTransaksiKredit(res.data.data);
+    
   };
 
   const getTransactionDebit = async () => {
-    const res = await transactionDebit();
-    console.log("Transaksi Debit", res);
-    setTransaksiDebit(res.data.data);
+   
+      const res = await transactionDebit();
+      setTransaksiDebit(res.data.data);
+    
   };
-
   const mappingKredit = [
     transaksiKredit.map((el) => {
       return el.nominal;
@@ -61,48 +64,48 @@ const Home = () => {
   ];
 
   const mappingDebit = [
-    transaksiDebit.map((el) =>{
-      return(
-        el.nominal
-      )
-    }
-    )
-  ]
+    transaksiDebit.map((el) => {
+      return el.nominal;
+    }),
+  ];
 
   const historyBox = () =>{
     
   }
 
   function kreditLoop() {
-    let total= 0;
+    let total = 0;
     for (let i = 0; i < mappingKredit[0].length; i++) {
       total = total + mappingKredit[0][i];
     }
-    console.log("total:", total)
     setKreditTotal(total);
   }
 
   function debitLoop() {
-    let total= 0;
+    let total = 0;
     for (let i = 0; i < mappingDebit[0].length; i++) {
       total = total + mappingDebit[0][i];
     }
-    console.log("total:", total)
     setDebitTotal(total);
   }
 
   const getUserData = async () => {
-    const response = await getUserbyEmail();
-    setBalance(response.data.data.saldo);
-    if (response.data.data.noTelp != null) {
-      setNoTelp(response.data.data.noTelp);
-    }
+    
+      const response = await getUserbyEmail();
+
+        setBalance(response.data.data.saldo);
+      
+      if (response.data.data.noTelp != null) {
+        setNoTelp(response.data.data.noTelp);
+      }
+    
   };
 
   const getHistory = async () => {
-    const response = await HistoryHomeService();
-    console.log(response);
-    setHistory(response.data.data);
+    if (localStorage.getItem("user") != null) {
+      const response = await HistoryHomeService();
+      setHistory(response.data.data);
+    }
   };
 
   return (
@@ -175,16 +178,16 @@ const Home = () => {
                   <p>Kredit</p>
                   <br />
                   <p style={{ color: "green", fontWeight: "bolder" }}>
-                  <NumberFormat
-                  thousandsGroupStyle="thousand"
-                  value={kreditTotal}
-                  prefix="Rp "
-                  decimalSeparator=","
-                  displayType="text"
-                  type="text"
-                  thousandSeparator="."
-                  allowNegative={true}
-                />
+                    <NumberFormat
+                      thousandsGroupStyle="thousand"
+                      value={kreditTotal}
+                      prefix="Rp "
+                      decimalSeparator=","
+                      displayType="text"
+                      type="text"
+                      thousandSeparator="."
+                      allowNegative={true}
+                    />
                   </p>
                 </div>
                 <div style={{ textAlign: "right" }} className="Debit">
@@ -193,16 +196,16 @@ const Home = () => {
                   <p>Debit</p>
                   <br />
                   <p style={{ color: "red", fontWeight: "bolder" }}>
-                  <NumberFormat
-                  thousandsGroupStyle="thousand"
-                  value={debitTotal}
-                  prefix="Rp "
-                  decimalSeparator=","
-                  displayType="text"
-                  type="text"
-                  thousandSeparator="."
-                  allowNegative={true}
-                />
+                    <NumberFormat
+                      thousandsGroupStyle="thousand"
+                      value={debitTotal}
+                      prefix="Rp "
+                      decimalSeparator=","
+                      displayType="text"
+                      type="text"
+                      thousandSeparator="."
+                      allowNegative={true}
+                    />
                   </p>
                 </div>
               </div>
