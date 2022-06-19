@@ -3,14 +3,14 @@ import Card6 from "../components/Card/Card6";
 import Card5 from "../components/Card/Card5";
 import RightBox from "../components/RightBox/RightBox";
 import HomeLayouts from "../Layouts/HomeLayouts/HomeLayouts";
-import people1 from "../Assets/Ragil.png";
+import people1 from "../Assets/defaultPhoto.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Transfer/styleTransferConfirmation.css";
 import ButtonComp from "../components/Button/ButtonComp";
 import Pin from "../components/PinForm/Pin";
 import { getUserbyEmail, getUserReceiverbyEmail } from "../services/UserService";
 import { checkPin } from "../services/ProfilService";
-import { transferService, updateBalance } from "../services/TransactionService";
+import { getReceiverProfilByEmail, transferService, updateBalance } from "../services/TransactionService";
 import { getEmail } from "../API/Api";
 import NumberFormat from "react-number-format";
 const TransferConfirmation = () => {
@@ -20,7 +20,7 @@ const TransferConfirmation = () => {
   const [email, setEmail] = useState();
   const [pin, setPin] = useState([]);
   const [lastBalance,setLastBalance] = useState();
-
+  const [image, setImage] = useState();
   const navigate = useNavigate();
 
   function openPin() {
@@ -47,17 +47,18 @@ const TransferConfirmation = () => {
   }
 
   useEffect(() => {
-    getUser();
+    getImageUser();
     getCurrentDate();
     User();
   }, []);
 
-  const getUser = async () => {
-    const email = localStorage.getItem("emailReceiver");
-    const res = await getUserReceiverbyEmail(email);
+  const getImageUser = async () => {
+    const res = await getReceiverProfilByEmail(localStorage.getItem("emailReceiver"));
     console.log(res);
     setNama(res.data.data.nama);
-    setEmail(res.data.data.user.email);
+    setEmail(res.data.data.email);
+    setImage(res.data.data.image ? res.data.data.image : people1)
+    
   };
 
   const User = async () =>{
@@ -150,7 +151,7 @@ const TransferConfirmation = () => {
       </div>
       <RightBox>
         <h4>Transfer To</h4>
-        <Card5 image={people1} cardTitle={nama} cardSubtitle={email} />
+        <Card5 image={image} cardTitle={nama} cardSubtitle={email} />
         <br />
         <h4>Details</h4>
         <Card6

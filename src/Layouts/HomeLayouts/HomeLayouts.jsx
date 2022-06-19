@@ -187,7 +187,7 @@ const HomeLayouts = (props) => {
   }
 
   function checkHalaman() {
-    if (halaman === "home") {
+    if (halaman === "home" || halaman === "history") {
       setDashboard(dashboardImgBlue);
       setLeftTextDashboard("left-text-color");
     } else if (halaman === "transfer"|| halaman === "transferSearch") {
@@ -198,6 +198,9 @@ const HomeLayouts = (props) => {
       setLeftTextProfile("left-text-color");
     }
     if (halaman === "transferSearch") {
+      setMarginTop("250px")
+    }
+    if (halaman === "history") {
       setMarginTop("250px")
     }
   }

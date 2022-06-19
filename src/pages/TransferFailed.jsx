@@ -3,7 +3,7 @@ import Card6 from "../components/Card/Card6";
 import Card5 from "../components/Card/Card5";
 import RightBox from "../components/RightBox/RightBox";
 import HomeLayouts from "../Layouts/HomeLayouts/HomeLayouts";
-import people1 from "../Assets/Ragil.png";
+import people1 from "../Assets/defaultPhoto.jpg";
 import { Link } from "react-router-dom";
 import '../styles/Transfer/styleTransferConfirmation.css'
 import ButtonComp from "../components/Button/ButtonComp";
@@ -11,9 +11,11 @@ import failedImg from '../Assets/failed.png'
 import '../styles/Transfer/styleTransferSucces.css'
 import { getUserbyEmail, getUserReceiverbyEmail } from '../services/UserService';
 import NumberFormat from 'react-number-format';
+import { getReceiverProfilByEmail } from '../services/TransactionService';
 const TransferFailed = () => {
   const [date, setDate] = useState();
   const [nama, setNama] = useState();
+  const [image, setImage] = useState();
   const [email, setEmail] = useState();
   const [lastBalance,setLastBalance] = useState();
 
@@ -26,18 +28,25 @@ const TransferFailed = () => {
   }
 
   useEffect(() => {
-    getUser();
+    getImageUser();
     getCurrentDate();
     User();
+    clearNotes();
   }, []);
 
-  const getUser = async () => {
-    const email = localStorage.getItem("emailReceiver");
-    const res = await getUserReceiverbyEmail(email);
+  const getImageUser = async () => {
+    const res = await getReceiverProfilByEmail(localStorage.getItem("emailReceiver"));
     console.log(res);
     setNama(res.data.data.nama);
-    setEmail(res.data.data.user.email);
+    setEmail(res.data.data.email);
+    setImage(res.data.data.image ? res.data.data.image : people1)
+    
   };
+
+  function clearNotes() {
+    localStorage.removeItem("notes")
+    localStorage.removeItem("nominalTransfer")
+  }
 
   const User = async () =>{
     const res = await getUserbyEmail();
@@ -82,7 +91,7 @@ const TransferFailed = () => {
         <br />
         <h4>Transfer To</h4>
         <Card5
-          image={people1}
+          image={image}
           cardTitle={nama}
           cardSubtitle={email}
         />

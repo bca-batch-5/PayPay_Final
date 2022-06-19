@@ -42,17 +42,7 @@ const Transfer = () => {
   return (
     <HomeLayouts halaman="transferSearch">
       <RightBox>
-        <h4>Search Receiver</h4>
-        <div className="search-box">
-          <div className="in-search-box">
-            <i className="fa fa-search"></i>
-            <input
-              className="input-search"
-              type="text"
-              placeholder="Search receiver here"
-            />
-          </div>
-        </div>
+        <h4>List Receiver</h4>
         <div className="receiver-box">
           {imagePeople && imagePeople.map((e) => {
             return (

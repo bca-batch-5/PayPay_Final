@@ -23,7 +23,7 @@ useEffect(()=> {
   return (
     <div className="transaction-box">
       <div className="transaction-box-left">
-        <img src={imgSrc} alt="foto-orang" />
+        <img src={imgSrc} alt="foto-orang" style={{ width: "80px",height: "80px",borderRadius:" 20px"}} />
         <div className="transaction-box-detail">
           <p style={{ fontWeight: "bold", fontSize: "18px" }}>{nama}</p>
           <p style={{ fontSize: "12px", color: "#7A7886" } }>{tipe}</p>
